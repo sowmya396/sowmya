@@ -1,1205 +1,841 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navratri Utsav - Royal Experience Center & Lounge</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- JS Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        bougie: {
-                            bg: '#0d021a',
-                            card: 'rgba(23, 7, 43, 0.85)',
-                            border: 'rgba(243, 211, 140, 0.35)',
-                            gold: '#f3d38c',
-                            goldMetallic: '#d4af37',
-                            goldLight: '#fff2ce',
-                            plum: '#1f0535',
-                            crimson: '#630c25',
-                            saffron: '#e85d04',
-                            teal: '#0a4a5c'
-                        }
-                    },
-                    fontFamily: {
-                        cinzel: ['Cinzel', 'serif'],
-                        playfair: ['Playfair Display', 'serif'],
-                        sans: ['Plus Jakarta Sans', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-
+    <title>Navratri Utsav - Royal Haveli Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
+        :root {
+            --bg-indigo: #0d021a;
+            --bg-card: #18082a;
+            --gold-primary: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #aa7c11;
+            --accent-crimson: #800020;
+            --text-light: #f8f5f0;
+            --glass-bg: rgba(24, 8, 42, 0.75);
+            --glass-border: rgba(212, 175, 55, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
         body {
-            background-color: #0d021a;
-            color: #f3d38c;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-indigo);
+            color: var(--text-light);
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(99, 12, 37, 0.45) 0%, transparent 70%),
-                radial-gradient(circle at 10% 90%, rgba(243, 211, 140, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(10, 74, 92, 0.3) 0%, transparent 50%);
-            background-attachment: fixed;
+                radial-gradient(circle at 50% 0%, rgba(128, 0, 32, 0.4) 0%, transparent 70%),
+                radial-gradient(circle at 50% 100%, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+            min-height: 100vh;
+            padding-bottom: 60px;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        .gold-border {
-            border: 1px solid rgba(243, 211, 140, 0.4);
-            box-shadow: 0 0 15px rgba(243, 211, 140, 0.1), inset 0 0 10px rgba(243, 211, 140, 0.05);
+        /* Ambient Petals Animation */
+        .petal {
+            position: fixed;
+            background: #ffbf00;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatPetal 12s linear infinite;
         }
 
-        .gold-text-glow {
-            text-shadow: 0 0 18px rgba(243, 211, 140, 0.6);
+        @keyframes floatPetal {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
         }
 
-        .glass-card {
-            background: rgba(23, 7, 43, 0.82);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(243, 211, 140, 0.3);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Header & Leaderboard */
+        header {
+            background: rgba(13, 2, 26, 0.9);
+            border-bottom: 2px solid var(--gold-primary);
+            padding: 20px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .glass-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(243, 211, 140, 0.85);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(243, 211, 140, 0.25);
+        .brand-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-primary);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            letter-spacing: 2px;
         }
 
-        .royal-flame {
-            width: 14px;
-            height: 24px;
-            background: linear-gradient(to top, #ff4500, #ffa500, #ffff00, #ffffff);
-            border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
-            animation: royalFlicker 1.4s infinite alternate ease-in-out;
-            transform-origin: center bottom;
+        .header-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
 
-        @keyframes royalFlicker {
-            0% { transform: scale(1) rotate(-1deg); opacity: 0.95; }
-            50% { transform: scale(1.1) rotate(2deg); opacity: 1; filter: drop-shadow(0 0 10px #ffa500); }
-            100% { transform: scale(0.95) rotate(-2deg); opacity: 0.9; }
+        .audio-btn {
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
         }
 
-        #petal-canvas {
+        .audio-btn:hover {
+            background: var(--gold-primary);
+            color: var(--bg-indigo);
+        }
+
+        /* Global Leaderboard Bar */
+        .leaderboard-bar {
+            background: var(--glass-bg);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 12px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .team-badge {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold-primary);
+            padding: 6px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Cinzel', serif;
+        }
+
+        .team-name { color: var(--gold-light); font-weight: 600; }
+        .team-score { color: #fff; font-size: 1.1rem; font-weight: 700; }
+
+        .score-ctrl {
+            background: none;
+            border: none;
+            color: var(--gold-primary);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 0 4px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-primary);
+            text-align: center;
+            margin: 40px 0 20px;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+            margin: 10px auto 0;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            padding: 12px 28px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: var(--bg-indigo);
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Grid Layouts */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5deg);
+            border-color: var(--gold-primary);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+        }
+
+        .card-header {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold-light);
+            margin-bottom: 12px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .card-btn {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: var(--bg-indigo);
+            border: none;
+            padding: 10px 20px;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .card-btn:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Jeopardy Board Styling */
+        .jeopardy-board {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        .jeopardy-column {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .jeopardy-header {
+            background: var(--accent-crimson);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 15px 5px;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+        }
+
+        .jeopardy-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--gold-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            padding: 25px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .jeopardy-card:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: scale(1.03);
+            border-color: var(--gold-primary);
+        }
+
+        .jeopardy-card.used {
+            opacity: 0.2;
+            cursor: not-allowed;
+            background: #000;
+            border-color: #444;
+        }
+
+        /* Modals */
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0d021a; }
-        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #f3d38c; }
+        .modal-overlay.active { display: flex; }
+
+        .modal-body {
+            background: var(--bg-card);
+            border: 2px solid var(--gold-primary);
+            border-radius: 12px;
+            padding: 35px;
+            max-width: 650px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            text-align: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: var(--gold-primary);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .modal-prompt {
+            font-size: 1.25rem;
+            margin: 20px 0;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .modal-prompt img {
+            max-width: 100%;
+            max-height: 380px;
+            border-radius: 8px;
+            border: 2px solid var(--gold-primary);
+            margin: 10px 0;
+        }
+
+        .modal-answer {
+            display: none;
+            background: rgba(128, 0, 32, 0.4);
+            border: 1px solid var(--gold-primary);
+            padding: 15px;
+            border-radius: 8px;
+            color: var(--gold-light);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        /* Setup Engine Form */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--gold-light);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        /* Rhythm Beats Pad */
+        .pad-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .beat-pad {
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 12px;
+            color: var(--gold-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .beat-pad:active, .beat-pad.playing {
+            background: var(--gold-primary);
+            color: var(--bg-indigo);
+            transform: scale(0.96);
+            box-shadow: 0 0 20px var(--gold-primary);
+        }
     </style>
 </head>
-<body class="min-h-screen relative pb-16">
+<body>
 
-    <!-- Petal Canvas Overlay -->
-    <canvas id="petal-canvas"></canvas>
+    <!-- Ambient Floating Petals -->
+    <div class="petal" style="left: 10%; width: 15px; height: 15px; animation-delay: 0s;"></div>
+    <div class="petal" style="left: 35%; width: 10px; height: 10px; animation-delay: 3s;"></div>
+    <div class="petal" style="left: 60%; width: 18px; height: 18px; animation-delay: 1s;"></div>
+    <div class="petal" style="left: 85%; width: 12px; height: 12px; animation-delay: 5s;"></div>
 
-    <header class="sticky top-0 z-40 bg-bougie-bg/90 border-b border-bougie-gold/30 backdrop-blur-md px-4 sm:px-8 py-3.5 shadow-2xl">
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
-            
-            <!-- Brand Logo & Title -->
-            <div class="flex items-center space-x-3.5 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-                <div class="relative flex items-center justify-center p-2 rounded-full border border-bougie-gold/50 bg-bougie-crimson shadow-md">
-                    <div class="royal-flame"></div>
-                </div>
-                <div>
-                    <h1 class="font-cinzel text-lg sm:text-2xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-bougie-gold via-white to-bougie-goldLight">
-                        NAV RATRI UTSAV
-                    </h1>
-                    <p class="text-[10px] sm:text-xs text-bougie-saffron tracking-widest font-cinzel uppercase font-bold">Experience Center & Lounge</p>
-                </div>
-            </div>
-
-            <!-- Active Teams Live Score Ticker -->
-            <div id="header-teams-bar" class="hidden md:flex items-center gap-3 bg-black/50 px-4 py-1.5 rounded-full border border-bougie-gold/30 text-xs font-cinzel">
-                <span class="text-bougie-gold font-bold uppercase mr-1"><i class="fa-solid fa-trophy text-bougie-saffron mr-1"></i> Scores:</span>
-                <div id="header-teams-list" class="flex items-center gap-4">
-                    <!-- Dynamic Teams Injected via JS -->
-                </div>
-            </div>
-
-            <!-- Header Controls -->
-            <div class="flex items-center gap-3">
-                <button onclick="toggleFestiveSynth()" id="bgm-btn" class="p-2.5 rounded-xl border border-bougie-gold/40 bg-black/40 hover:bg-bougie-gold/20 text-bougie-gold text-sm transition" title="Toggle Ambient Audio Synth">
-                    <i id="bgm-icon" class="fa-solid fa-music"></i>
-                </button>
-
-                <button onclick="openGlobalLeaderboard()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-bougie-teal to-teal-800 border border-bougie-gold text-white text-xs sm:text-sm font-cinzel font-bold hover:brightness-125 transition flex items-center gap-2 gold-border shadow-lg">
-                    <i class="fa-solid fa-ranking-star text-bougie-gold"></i>
-                    <span>Leaderboard</span>
-                </button>
-            </div>
+    <header>
+        <div class="brand-title">Navratri Utsav</div>
+        <div class="header-controls">
+            <button class="audio-btn" onclick="toggleSynthBeat()">🎵 Ambient Dhol Synth</button>
+            <button class="audio-btn" onclick="openSetupModal()">⚙️ Team Setup</button>
         </div>
     </header>
 
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-8 pb-6 text-center relative z-10">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-bougie-gold/40 bg-bougie-crimson/60 text-bougie-gold text-xs font-cinzel tracking-widest uppercase mb-3 gold-border">
-            <span>✨</span><span>Shubh Navratri Celebrations</span><span>✨</span>
+    <!-- Global Persistent Scoreboard -->
+    <div class="leaderboard-bar" id="scoreboardBar">
+        <div class="team-badge">
+            <span class="team-name">Devi Dynasty</span>
+            <span class="team-score" id="score-0">0</span>
+            <button class="score-ctrl" onclick="adjustScore(0, 100)">+</button>
+            <button class="score-ctrl" onclick="adjustScore(0, -100)">-</button>
         </div>
-        <h2 class="font-playfair text-3xl sm:text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-bougie-goldLight via-bougie-gold to-bougie-saffron font-bold mb-3 gold-text-glow">
-            Navratri Experience Center & Game Lounge
-        </h2>
-        <p class="max-w-2xl mx-auto text-xs sm:text-sm text-bougie-goldLight/80 leading-relaxed mb-8">
-            Choose from interactive mythology team games or visit physical cultural experience booths. Select any game to launch team setup and track live points!
-        </p>
-
-        <!-- Category Filter Tabs -->
-        <div class="flex justify-center items-center gap-3 sm:gap-4 flex-wrap">
-            <button onclick="filterActivities('all')" id="tab-all" class="tab-btn px-6 py-2.5 rounded-xl border border-bougie-gold bg-bougie-gold text-bougie-bg font-cinzel font-bold text-xs sm:text-sm shadow-xl transition">
-                <i class="fa-solid fa-border-all mr-2"></i> All Activities (8)
-            </button>
-            <button onclick="filterActivities('game')" id="tab-game" class="tab-btn px-6 py-2.5 rounded-xl border border-bougie-gold/40 bg-bougie-plum/90 hover:bg-bougie-gold/20 text-bougie-gold font-cinzel font-bold text-xs sm:text-sm transition">
-                <i class="fa-solid fa-gamepad mr-2"></i> Interactive Games (4)
-            </button>
-            <button onclick="filterActivities('experience')" id="tab-experience" class="tab-btn px-6 py-2.5 rounded-xl border border-bougie-gold/40 bg-bougie-plum/90 hover:bg-bougie-gold/20 text-bougie-gold font-cinzel font-bold text-xs sm:text-sm transition">
-                <i class="fa-solid fa-palette mr-2"></i> Cultural Experiences (4)
-            </button>
+        <div class="team-badge">
+            <span class="team-name">Rishi Warriors</span>
+            <span class="team-score" id="score-1">0</span>
+            <button class="score-ctrl" onclick="adjustScore(1, 100)">+</button>
+            <button class="score-ctrl" onclick="adjustScore(1, -100)">-</button>
         </div>
-    </section>
+    </div>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 relative z-10">
-        <div id="activities-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <!-- GAME 1: QUICKWITS -->
-            <div class="activity-card glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden" data-type="game">
-                <div>
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-bougie-gold/20">
-                        <span class="px-3 py-1 rounded-md text-[10px] font-cinzel font-bold uppercase tracking-widest bg-bougie-crimson text-bougie-gold border border-bougie-gold/40">
-                            <i class="fa-solid fa-bolt mr-1"></i> Rapid Quiz
-                        </span>
-                        <div class="flex items-center space-x-3 text-xs text-bougie-goldLight/80 font-medium">
-                            <span><i class="fa-solid fa-users text-bougie-gold mr-1"></i> 2+ Players</span>
-                            <span>•</span>
-                            <span class="text-bougie-gold font-semibold">Team or Individual</span>
-                        </div>
-                    </div>
-
-                    <h3 class="font-cinzel font-bold text-2xl text-bougie-gold mb-2">QuickWits (Navratri Rapid-Fire)</h3>
-                    <p class="text-xs sm:text-sm text-bougie-goldLight/80 mb-6 leading-relaxed">
-                        Rapid-fire category shout-out game! Host reads category prompts (e.g., <i>"Avatars of Navadurga"</i>, <i>"Weapons of Durga"</i>). The fastest team or player to shout a valid answer claims points.
-                    </p>
-                </div>
-
-                <button onclick="triggerGameSetup('quickwits')" class="w-full py-3.5 px-4 rounded-xl font-cinzel font-bold text-xs sm:text-sm bg-gradient-to-r from-bougie-goldMetallic via-bougie-gold to-bougie-goldLight text-bougie-bg hover:brightness-110 transition shadow-xl flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-play"></i> PLAY QUICKWITS
-                </button>
-            </div>
-
-            <!-- GAME 2: JEOPARDY QUIZ -->
-            <div class="activity-card glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden" data-type="game">
-                <div>
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-bougie-gold/20">
-                        <span class="px-3 py-1 rounded-md text-[10px] font-cinzel font-bold uppercase tracking-widest bg-bougie-teal text-bougie-gold border border-bougie-gold/40">
-                            <i class="fa-solid fa-table-cells mr-1"></i> 5x5 Jeopardy
-                        </span>
-                        <div class="flex items-center space-x-3 text-xs text-bougie-goldLight/80 font-medium">
-                            <span><i class="fa-solid fa-users text-bougie-gold mr-1"></i> 2+ Teams</span>
-                            <span>•</span>
-                            <span class="text-bougie-gold font-semibold">Team Game</span>
-                        </div>
-                    </div>
-
-                    <h3 class="font-cinzel font-bold text-2xl text-bougie-gold mb-2">Navratri & Mythology Jeopardy</h3>
-                    <p class="text-xs sm:text-sm text-bougie-goldLight/80 mb-6 leading-relaxed">
-                        Full 5x5 Jeopardy board featuring 5 categories ($100-$500) including <b>"Gods of Cinema"</b>, <b>"Epic Bonds"</b>, <b>"One Letter Away"</b>, <b>"This is how we Navratri"</b>, and <b>"Gopuram GeoGuesser"</b> (image-only questions).
-                    </p>
-                </div>
-
-                <button onclick="triggerGameSetup('jeopardy')" class="w-full py-3.5 px-4 rounded-xl font-cinzel font-bold text-xs sm:text-sm bg-gradient-to-r from-bougie-teal via-teal-600 to-bougie-gold text-white hover:brightness-110 transition shadow-xl flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-chess-board"></i> PLAY JEOPARDY
-                </button>
-            </div>
-
-            <!-- GAME 3: GOLU PLACEMENT CHALLENGE -->
-            <div class="activity-card glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden" data-type="game">
-                <div>
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-bougie-gold/20">
-                        <span class="px-3 py-1 rounded-md text-[10px] font-cinzel font-bold uppercase tracking-widest bg-amber-900 text-bougie-gold border border-bougie-gold/40">
-                            <i class="fa-solid fa-layer-group mr-1"></i> Match & Place
-                        </span>
-                        <div class="flex items-center space-x-3 text-xs text-bougie-goldLight/80 font-medium">
-                            <span><i class="fa-solid fa-user-group text-bougie-gold mr-1"></i> 1-2 Players</span>
-                            <span>•</span>
-                            <span class="text-bougie-gold font-semibold">Solo Time-Trial / 1v1 Knockout</span>
-                        </div>
-                    </div>
-
-                    <h3 class="font-cinzel font-bold text-2xl text-bougie-gold mb-2">Golu Match & Place Challenge</h3>
-                    <p class="text-xs sm:text-sm text-bougie-goldLight/80 mb-6 leading-relaxed">
-                        Match sacred idols (Goddess Durga, Saraswathi, Lakshmi, Lord Ganesha, Marapachi Dolls) onto their correct 3-tier Golu steps with placement scoring.
-                    </p>
-                </div>
-
-                <button onclick="triggerGameSetup('golu')" class="w-full py-3.5 px-4 rounded-xl font-cinzel font-bold text-xs sm:text-sm bg-gradient-to-r from-amber-700 via-bougie-saffron to-bougie-gold text-bougie-bg hover:brightness-110 transition shadow-xl flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-hands-holding"></i> PLAY GOLU CHALLENGE
-                </button>
-            </div>
-
-            <!-- GAME 4: FASTEST FINGER FIRST -->
-            <div class="activity-card glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden" data-type="game">
-                <div>
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-bougie-gold/20">
-                        <span class="px-3 py-1 rounded-md text-[10px] font-cinzel font-bold uppercase tracking-widest bg-bougie-crimson text-bougie-gold border border-bougie-gold/40">
-                            <i class="fa-solid fa-stopwatch mr-1"></i> Rapid MCQ
-                        </span>
-                        <div class="flex items-center space-x-3 text-xs text-bougie-goldLight/80 font-medium">
-                            <span><i class="fa-solid fa-users text-bougie-gold mr-1"></i> 2+ Players</span>
-                            <span>•</span>
-                            <span class="text-bougie-gold font-semibold">Either Mode</span>
-                        </div>
-                    </div>
-
-                    <h3 class="font-cinzel font-bold text-2xl text-bougie-gold mb-2">Fastest Finger First MCQ</h3>
-                    <p class="text-xs sm:text-sm text-bougie-goldLight/80 mb-6 leading-relaxed">
-                        Rapid multiple-choice mythology trivia with countdown timer bars, Web Audio synth buzzers, and speed bonus calculation.
-                    </p>
-                </div>
-
-                <button onclick="triggerGameSetup('quiz')" class="w-full py-3.5 px-4 rounded-xl font-cinzel font-bold text-xs sm:text-sm bg-gradient-to-r from-bougie-crimson via-red-700 to-bougie-gold text-white hover:brightness-110 transition shadow-xl flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-bell-concierge"></i> PLAY MCQ TRIVIA
-                </button>
-            </div>
-
-            <!-- EXPERIENCE 1: DIYA CRAFTING (PHYSICAL VISIT HOST) -->
-            <div class="activity-card glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden" data-type="experience">
-                <div>
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-bougie-gold/20">
-                        <span class="px-3 py-1 rounded-md text-[10px] font-cinzel font-bold uppercase tracking-widest bg-amber-800 text-bougie-gold border border-bougie-gold/40">
-                            <i class="fa-solid fa-hands-holding-circle mr-1"></i> Craft Activity
-                        </span>
-                        <div class="flex items-center space-x-3 text-xs text-bougie-goldLight/80 font-medium">
-                            <span><i class="fa-solid fa-users text-bougie-gold mr-1"></i> 1+ Person</span>
-                            <span>•</span>
-                            <span class="text-bougie-gold font-semibold">Either Mode</span>
-                        </div>
-                    </div>
-
-                    <h3 class="font-cinzel font-bold text-2xl text-bougie-gold mb-2">Pure Clay Diya Crafting</h3>
-                    <p class="text-xs sm:text-sm text-bougie-goldLight/80 mb-4 leading-relaxed">
-                        Physical Activity: Visit the host counter to craft and shape your raw clay diya. Choose your natural clay, trim the edges, and prepare for lighting!
-                    </p>
-                    <div class="p-3 bg-black/40 rounded-xl border border-bougie-gold/30 text-xs text-bougie-goldLight mb-6">
-                        <i class="fa-solid fa-circle-info text-bougie-saffron mr-1"></i> Physical hands-on booth activity with artisan host.
-                    </div>
-                </div>
-
-                <button onclick="showExperienceInfo('Pure Clay Diya Crafting', 'Visit the craft table to mold raw terracotta clay, carve rim patterns, and set wicks with our artisan host!')" class="w-full py-3.5 px-4 rounded-xl font-cinzel font-bold text-xs sm:text-sm bg-gradient-to-r from-bougie-plum via-black to-bougie-plum border-2 border-bougie-gold/60 text-bougie-gold hover:border-bougie-gold transition shadow-lg flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-hand-holding-hand text-bougie-saffron"></i>
-                    <span>Visit Host / Ask Host to Participate</span>
-                </button>
-            </div>
-
-            <!-- EXPERIENCE 2: ARABIC MEHENDI (PHYSICAL VISIT HOST) -->
-            <div class="activity-card glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden" data-type="experience">
-                <div>
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-bougie-gold/20">
-                        <span class="px-3 py-1 rounded-md text-[10px] font-cinzel font-bold uppercase tracking-widest bg-emerald-900 text-bougie-gold border border-bougie-gold/40">
-                            <i class="fa-solid fa-hand-sparkles mr-1"></i> Live Application
-                        </span>
-                        <div class="flex items-center space-x-3 text-xs text-bougie-goldLight/80 font-medium">
-                            <span><i class="fa-solid fa-user text-bougie-gold mr-1"></i> 1 Person / Session</span>
-                            <span>•</span>
-                            <span class="text-bougie-gold font-semibold">Individual</span>
-                        </div>
-                    </div>
-
-                    <h3 class="font-cinzel font-bold text-2xl text-bougie-gold mb-2">Arabic Mehendi & Henna Art</h3>
-                    <p class="text-xs sm:text-sm text-bougie-goldLight/80 mb-4 leading-relaxed">
-                        Physical Activity: Head to the Henna Lounge where the artist will apply custom Arabic henna designs on your hand.
-                    </p>
-                    <div class="p-3 bg-black/40 rounded-xl border border-bougie-gold/30 text-xs text-bougie-goldLight mb-6">
-                        <i class="fa-solid fa-circle-info text-bougie-saffron mr-1"></i> Live henna artist station at the venue.
-                    </div>
-                </div>
-
-                <button onclick="showExperienceInfo('Arabic Mehendi & Henna Art', 'Queue up at the Henna Lounge to get custom Arabic floral vines and peacock motifs applied by our host artist!')" class="w-full py-3.5 px-4 rounded-xl font-cinzel font-bold text-xs sm:text-sm bg-gradient-to-r from-bougie-plum via-black to-bougie-plum border-2 border-bougie-gold/60 text-bougie-gold hover:border-bougie-gold transition shadow-lg flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-hand-holding-hand text-bougie-saffron"></i>
-                    <span>Visit Host / Ask Host to Participate</span>
-                </button>
-            </div>
-
-            <!-- EXPERIENCE 3: MANDALA ART (PHYSICAL VISIT HOST) -->
-            <div class="activity-card glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden" data-type="experience">
-                <div>
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-bougie-gold/20">
-                        <span class="px-3 py-1 rounded-md text-[10px] font-cinzel font-bold uppercase tracking-widest bg-purple-900 text-bougie-gold border border-bougie-gold/40">
-                            <i class="fa-solid fa-dharmachakra mr-1"></i> Physical Art Activity
-                        </span>
-                        <div class="flex items-center space-x-3 text-xs text-bougie-goldLight/80 font-medium">
-                            <span><i class="fa-solid fa-users text-bougie-gold mr-1"></i> 1+ Person</span>
-                            <span>•</span>
-                            <span class="text-bougie-gold font-semibold">Either Mode</span>
-                        </div>
-                    </div>
-
-                    <h3 class="font-cinzel font-bold text-2xl text-bougie-gold mb-2">Mandala Art & Color Studio</h3>
-                    <p class="text-xs sm:text-sm text-bougie-goldLight/80 mb-4 leading-relaxed">
-                        Physical Activity: Collect your printed mandala canvas and art supplies at the table to color your masterpiece.
-                    </p>
-                    <div class="p-3 bg-black/40 rounded-xl border border-bougie-gold/30 text-xs text-bougie-goldLight mb-6">
-                        <i class="fa-solid fa-circle-info text-bougie-saffron mr-1"></i> Art table stocked with canvas prints & metallic pens.
-                    </div>
-                </div>
-
-                <button onclick="showExperienceInfo('Mandala Art & Color Studio', 'Visit the art station to receive printed mandala sheets, jewel-toned metallic markers, and watercolor sets!')" class="w-full py-3.5 px-4 rounded-xl font-cinzel font-bold text-xs sm:text-sm bg-gradient-to-r from-bougie-plum via-black to-bougie-plum border-2 border-bougie-gold/60 text-bougie-gold hover:border-bougie-gold transition shadow-lg flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-hand-holding-hand text-bougie-saffron"></i>
-                    <span>Visit Host / Ask Host to Participate</span>
-                </button>
-            </div>
-
-            <!-- EXPERIENCE 4: GARBA & DANDIYA (INTERACTIVE) -->
-            <div class="activity-card glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden" data-type="experience">
-                <div>
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-bougie-gold/20">
-                        <span class="px-3 py-1 rounded-md text-[10px] font-cinzel font-bold uppercase tracking-widest bg-rose-900 text-bougie-gold border border-bougie-gold/40">
-                            <i class="fa-solid fa-person-dancing mr-1"></i> Rhythm & Dance
-                        </span>
-                        <div class="flex items-center space-x-3 text-xs text-bougie-goldLight/80 font-medium">
-                            <span><i class="fa-solid fa-users text-bougie-gold mr-1"></i> 2+ People</span>
-                            <span>•</span>
-                            <span class="text-bougie-gold font-semibold">Group Floor</span>
-                        </div>
-                    </div>
-
-                    <h3 class="font-cinzel font-bold text-2xl text-bougie-gold mb-2">Garba & Dandiya Raas Lounge</h3>
-                    <p class="text-xs sm:text-sm text-bougie-goldLight/80 mb-6 leading-relaxed">
-                        Interactive audio synthesizer beat pad (Dhol beat, Dandiya clacks, Ghungroo, Taali) and visual step tutorials for 2-step and 3-step Garba!
-                    </p>
-                </div>
-
-                <button onclick="openActivityModal('garba')" class="w-full py-3.5 px-4 rounded-xl font-cinzel font-bold text-xs sm:text-sm bg-gradient-to-r from-rose-800 via-red-700 to-bougie-gold text-white hover:brightness-110 transition shadow-xl flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-drum"></i> LAUNCH BEAT PAD & STEPS
-                </button>
-            </div>
-
+    <div class="container">
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('jeopardyTab')">5x5 Jeopardy</button>
+            <button class="tab-btn" onclick="switchTab('interactiveGamesTab')">Interactive Games</button>
+            <button class="tab-btn" onclick="switchTab('experiencesTab')">Host-Led Experiences</button>
+            <button class="tab-btn" onclick="switchTab('garbaTab')">Garba Rhythm Lounge</button>
         </div>
-    </main>
 
-    <div id="modal-wrapper" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
-        <div class="bg-bougie-plum border-2 border-bougie-gold rounded-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-7 relative shadow-2xl">
-            
-            <!-- Close Modal -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-bougie-gold hover:text-white bg-black/60 hover:bg-bougie-crimson w-9 h-9 rounded-full flex items-center justify-center text-lg transition z-20">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+        <!-- 1. JEOPARDY TAB -->
+        <div id="jeopardyTab" class="tab-content active">
+            <h2 class="section-title">Royal Jeopardy Lounge</h2>
+            <div class="jeopardy-board" id="jeopardyBoard">
+                <!-- Populated via JS -->
+            </div>
+        </div>
 
-            <!-- GAME SETUP MODAL OVERLAY -->
-            <div id="modal-game-setup" class="modal-content hidden">
-                <div class="text-center mb-6">
-                    <div class="inline-flex p-3 rounded-full bg-bougie-crimson border border-bougie-gold text-bougie-gold text-xl mb-2">
-                        <i class="fa-solid fa-users-gear"></i>
-                    </div>
-                    <h3 id="setup-game-title" class="font-cinzel text-2xl sm:text-3xl font-bold text-bougie-gold">Game Setup</h3>
-                    <p id="setup-game-desc" class="text-xs sm:text-sm text-bougie-goldLight/80">Configure play mode, participant count, and team names!</p>
-                </div>
-
-                <div class="bg-black/50 p-5 rounded-xl border border-bougie-gold/30 mb-6 space-y-4">
-                    <!-- Mode Choice -->
+        <!-- 2. INTERACTIVE GAMES TAB -->
+        <div id="interactiveGamesTab" class="tab-content">
+            <h2 class="section-title">Digital Interactive Games</h2>
+            <div class="cards-grid">
+                <div class="card">
                     <div>
-                        <label class="block text-xs font-cinzel font-bold text-bougie-gold mb-2">Is this a Team Game or Individual Game?</label>
-                        <select id="setup-mode-select" class="w-full bg-bougie-bg border border-bougie-gold/60 rounded-xl p-3 text-bougie-gold text-xs sm:text-sm font-semibold focus:outline-none">
-                            <option value="team">Team Battle (Group Play)</option>
-                            <option value="individual">Individual Free-For-All</option>
-                        </select>
+                        <div class="card-header">QuickWits Rapid Prompt</div>
+                        <div class="card-desc">Rapid-fire mythology prompt drawer with countdown timer and host answer key.</div>
                     </div>
-
-                    <!-- Participant Count Dropdown -->
+                    <button class="card-btn" onclick="openGameModal('QuickWits')">Launch QuickWits</button>
+                </div>
+                <div class="card">
                     <div>
-                        <label class="block text-xs font-cinzel font-bold text-bougie-gold mb-2">How many teams or players are participating (2 - 6)?</label>
-                        <select id="setup-count-select" onchange="renderSetupInputs()" class="w-full bg-bougie-bg border border-bougie-gold/60 rounded-xl p-3 text-bougie-gold text-xs sm:text-sm font-semibold focus:outline-none">
-                            <option value="2">2 Teams / Players</option>
-                            <option value="3" selected>3 Teams / Players</option>
-                            <option value="4">4 Teams / Players</option>
-                            <option value="5">5 Teams / Players</option>
-                            <option value="6">6 Teams / Players</option>
-                        </select>
+                        <div class="card-header">Golu Placement Challenge</div>
+                        <div class="card-desc">Interactive 3-tier Golu step matching challenge. Arrange traditional idols in order.</div>
                     </div>
-
-                    <!-- Input Name Fields -->
-                    <div id="setup-names-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                        <!-- Rendered via JavaScript -->
-                    </div>
+                    <button class="card-btn" onclick="openGameModal('Golu')">Start Placement</button>
                 </div>
-
-                <button onclick="confirmSetupAndLaunch()" class="w-full py-4 bg-gradient-to-r from-bougie-goldMetallic via-bougie-gold to-bougie-goldLight text-bougie-bg font-cinzel font-bold text-sm rounded-xl hover:brightness-110 transition shadow-xl flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-circle-play"></i>
-                    <span>START GAME</span>
-                </button>
-            </div>
-
-            <!-- GAME 1: QUICKWITS MODAL -->
-            <div id="modal-quickwits" class="modal-content hidden">
-                <div class="text-center mb-4">
-                    <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-bougie-gold"><i class="fa-solid fa-bolt mr-2"></i>QuickWits Rapid Fire</h3>
-                    <p class="text-xs text-bougie-saffron">Read prompt • 10-second rapid timer • Fastest valid answer wins!</p>
-                </div>
-
-                <!-- Active Scores -->
-                <div id="qw-scores-bar" class="flex flex-wrap justify-center gap-3 mb-5 bg-black/40 p-3 rounded-xl border border-bougie-gold/30">
-                    <!-- Dynamic -->
-                </div>
-
-                <div class="bg-bougie-crimson/40 border-2 border-bougie-gold p-6 rounded-xl text-center mb-6 relative">
-                    <span class="text-xs text-bougie-saffron font-cinzel uppercase font-bold tracking-widest block mb-2">Category Prompt</span>
-                    <div id="qw-prompt-text" class="font-playfair text-xl sm:text-2xl text-bougie-gold min-h-[70px] flex items-center justify-center px-4">
-                        Click "Draw Prompt" to draw a rapid-fire mythology category!
-                    </div>
-
-                    <div class="w-full bg-gray-900 h-2 rounded-full overflow-hidden my-4 border border-bougie-gold/30">
-                        <div id="qw-timer-bar" class="bg-bougie-gold h-full w-full transition-all duration-100 linear"></div>
-                    </div>
-
-                    <div id="qw-answers-box" class="p-3 bg-black/80 rounded-lg text-left text-xs text-bougie-goldLight hidden border border-bougie-gold/40 mb-4">
-                        <strong class="text-bougie-gold block mb-1">Host Answer Reference:</strong>
-                        <span id="qw-answers-text"></span>
-                    </div>
-
-                    <div class="flex flex-wrap justify-center gap-3">
-                        <button onclick="drawQwPrompt()" class="px-5 py-2.5 rounded-xl font-cinzel font-bold bg-bougie-gold text-bougie-bg hover:bg-yellow-300 transition shadow">
-                            <i class="fa-solid fa-dice mr-1"></i> Draw Prompt & Start Timer
-                        </button>
-                        <button onclick="toggleQwAnswers()" class="px-4 py-2.5 rounded-xl font-cinzel font-semibold bg-bougie-teal text-white hover:bg-teal-600 transition">
-                            <i class="fa-solid fa-key mr-1"></i> Host Answers
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- GAME 2: JEOPARDY MODAL -->
-            <div id="modal-jeopardy" class="modal-content hidden">
-                <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                <div class="card">
                     <div>
-                        <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-bougie-gold"><i class="fa-solid fa-chess-board mr-2"></i>Navratri & Mythology Jeopardy</h3>
-                        <p class="text-xs text-bougie-saffron">5 Categories x 5 Questions • Click any card to reveal question</p>
+                        <div class="card-header">Fastest Finger First</div>
+                        <div class="card-desc">High-speed MCQ trivia with buzzer sounds and real-time response timers.</div>
                     </div>
-                </div>
-
-                <div id="jep-scores-bar" class="flex flex-wrap justify-around bg-black/40 p-2.5 rounded-xl border border-bougie-gold/30 mb-4 text-xs font-cinzel">
-                    <!-- Dynamic Scores -->
-                </div>
-
-                <div class="overflow-x-auto">
-                    <div id="jeopardy-grid-5x5" class="grid grid-cols-5 gap-2 min-w-[680px] text-center">
-                        <!-- JS Rendered Jeopardy Board -->
-                    </div>
-                </div>
-
-                <!-- Jeopardy Card Reveal Modal -->
-                <div id="jep-q-modal" class="mt-4 p-5 bg-bougie-plum border-2 border-bougie-gold rounded-xl hidden">
-                    <div id="jep-card-cat" class="text-xs text-bougie-saffron font-cinzel font-bold uppercase mb-2"></div>
-                    <div id="jep-card-text" class="font-playfair text-lg sm:text-xl text-white mb-4"></div>
-                    <div id="jep-card-img-container" class="hidden mb-4 flex justify-center">
-                        <img id="jep-card-img" src="" alt="Gopuram Clue" class="max-h-64 rounded-xl border-2 border-bougie-gold shadow-2xl object-cover">
-                    </div>
-                    <div id="jep-card-ans" class="p-3 bg-black/80 rounded-lg text-bougie-gold text-xs sm:text-sm hidden mb-4 border border-bougie-gold/40"></div>
-
-                    <div class="flex flex-wrap gap-2 justify-between items-center">
-                        <button onclick="toggleJepAns()" class="px-3.5 py-2 bg-bougie-teal text-white rounded-lg text-xs font-cinzel font-semibold hover:bg-teal-600">
-                            <i class="fa-solid fa-eye mr-1"></i> Reveal Answer
-                        </button>
-
-                        <div id="jep-award-btns" class="flex flex-wrap gap-1.5">
-                            <!-- Dynamic Award Buttons -->
-                        </div>
-                    </div>
+                    <button class="card-btn" onclick="openGameModal('FastestFinger')">Play FFF</button>
                 </div>
             </div>
+        </div>
 
-            <!-- GAME 3: GOLU SIMULATOR MODAL -->
-            <div id="modal-golu" class="modal-content hidden">
-                <div class="text-center mb-4">
-                    <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-bougie-gold"><i class="fa-solid fa-layer-group mr-2"></i>Golu Match & Place Challenge</h3>
-                    <p class="text-xs text-bougie-saffron">Match divine idols onto Tier 1, Tier 2, or Tier 3 traditional Golu steps!</p>
-                </div>
-
-                <div class="flex justify-between items-center bg-black/40 p-3 rounded-xl border border-bougie-gold/30 mb-4 text-xs font-cinzel">
-                    <div>Placed Idols: <span id="golu-score" class="font-bold text-bougie-gold text-sm">0 / 6</span></div>
-                    <button onclick="initGoluGame()" class="px-3 py-1 bg-bougie-gold text-bougie-bg rounded font-bold hover:bg-yellow-300">Reset Steps</button>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-black/40 p-3 rounded-xl border border-bougie-gold/30">
-                        <h4 class="font-cinzel text-bougie-gold text-xs uppercase font-bold mb-3 text-center">Unplaced Idols Tray</h4>
-                        <div id="golu-idol-pool" class="flex flex-col gap-2 min-h-[220px]">
-                            <!-- JS Rendered -->
-                        </div>
+        <!-- 3. HOST-LED EXPERIENCES TAB -->
+        <div id="experiencesTab" class="tab-content">
+            <h2 class="section-title">Host-Led Creative Workshops</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div>
+                        <div class="card-header">🪔 Diya Making Workshop</div>
+                        <div class="card-desc">Craft and paint traditional terracotta lamps with gold leaf trim.</div>
+                        <p style="color:var(--gold-light); font-size: 0.85rem; margin-bottom: 15px;">Mode: Physical Workshop | Participants: 1-6</p>
                     </div>
-
-                    <div class="md:col-span-2 space-y-3 bg-bougie-plum/90 p-4 rounded-xl border-2 border-bougie-gold/60">
-                        <div class="golu-step p-3 bg-amber-950/70 rounded-lg border border-dashed border-bougie-gold" data-step="1">
-                            <span class="text-xs font-cinzel font-bold text-bougie-gold block mb-1">Tier 1 (Top Step) - Tridevi (Durga, Lakshmi, Saraswathi)</span>
-                            <div class="idol-slot flex flex-wrap gap-2 min-h-[42px] items-center"></div>
-                        </div>
-                        <div class="golu-step p-3 bg-amber-900/60 rounded-lg border border-dashed border-bougie-gold" data-step="2">
-                            <span class="text-xs font-cinzel font-bold text-bougie-gold block mb-1">Tier 2 (Middle Step) - Avatars & Lord Ganesha</span>
-                            <div class="idol-slot flex flex-wrap gap-2 min-h-[42px] items-center"></div>
-                        </div>
-                        <div class="golu-step p-3 bg-amber-950/50 rounded-lg border border-dashed border-bougie-gold" data-step="3">
-                            <span class="text-xs font-cinzel font-bold text-bougie-gold block mb-1">Tier 3 (Lower Step) - Marapachi Pair Dolls</span>
-                            <div class="idol-slot flex flex-wrap gap-2 min-h-[42px] items-center"></div>
-                        </div>
+                    <button class="card-btn" style="background:#555; cursor:default;">Visit Host to Participate</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="card-header">🌿 Henna & Mehendi Corner</div>
+                        <div class="card-desc">Intricate festive henna patterns applied by master artists.</div>
+                        <p style="color:var(--gold-light); font-size: 0.85rem; margin-bottom: 15px;">Mode: Physical Lounge | Participants: Individual</p>
                     </div>
+                    <button class="card-btn" style="background:#555; cursor:default;">Visit Host to Participate</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="card-header">🎨 Mandala Art Studio</div>
+                        <div class="card-desc">Guided festive geometric art sessions using vibrant natural pigments.</div>
+                        <p style="color:var(--gold-light); font-size: 0.85rem; margin-bottom: 15px;">Mode: Guided Masterclass | Participants: Open</p>
+                    </div>
+                    <button class="card-btn" style="background:#555; cursor:default;">Visit Host to Participate</button>
                 </div>
             </div>
+        </div>
 
-            <!-- GAME 4: SPEED QUIZ MODAL -->
-            <div id="modal-quiz" class="modal-content hidden">
-                <div class="text-center mb-4">
-                    <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-bougie-gold"><i class="fa-solid fa-stopwatch mr-2"></i>Fastest Finger First MCQ</h3>
-                    <p class="text-xs text-bougie-saffron">10-second ticker • Answer quickly for speed bonus!</p>
-                </div>
-
-                <div class="bg-black/50 p-6 rounded-xl border border-bougie-gold/40 text-center">
-                    <div class="flex justify-between items-center mb-4 text-xs font-cinzel text-bougie-saffron">
-                        <span id="quiz-progress">Question 1 / 3</span>
-                        <span>Round Score: <span id="quiz-score" class="text-bougie-gold font-bold text-base">0</span></span>
-                    </div>
-
-                    <div class="w-full bg-gray-900 h-2.5 rounded-full overflow-hidden mb-6 border border-bougie-gold/30">
-                        <div id="quiz-timer-bar" class="bg-bougie-gold h-full w-full transition-all duration-100 linear"></div>
-                    </div>
-
-                    <h4 id="quiz-question-text" class="font-playfair text-lg sm:text-xl text-bougie-gold mb-6 min-h-[50px] flex items-center justify-center">
-                        Loading...
-                    </h4>
-
-                    <div id="quiz-options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-                        <!-- JS Rendered -->
-                    </div>
-
-                    <div id="quiz-feedback" class="text-xs font-bold min-h-[20px]"></div>
-                </div>
+        <!-- 4. GARBA RHYTHM TAB -->
+        <div id="garbaTab" class="tab-content">
+            <h2 class="section-title">Garba & Dandiya Beat Pad</h2>
+            <p style="text-align: center; color: #ccc; margin-bottom: 20px;">Tap beats or use keyboard keys [A, S, D, F] to play live festive instruments!</p>
+            <div class="pad-grid">
+                <div class="beat-pad" onclick="playPadSound(220)">🥁 Dhol Beat (Key A)</div>
+                <div class="beat-pad" onclick="playPadSound(440)">🥢 Dandiya Clack (Key S)</div>
+                <div class="beat-pad" onclick="playPadSound(880)">🔔 Ghungroo Chime (Key D)</div>
+                <div class="beat-pad" onclick="playPadSound(330)">👏 Taali Clap (Key F)</div>
             </div>
+        </div>
+    </div>
 
-            <!-- PHYSICAL EXPERIENCE INFORMATIONAL POPUP -->
-            <div id="modal-exp-info" class="modal-content hidden text-center p-4">
-                <div class="inline-flex p-4 rounded-full bg-bougie-crimson border-2 border-bougie-gold text-bougie-gold text-2xl mb-4">
-                    <i class="fa-solid fa-hands-holding-child"></i>
-                </div>
-                <h3 id="exp-info-title" class="font-cinzel text-2xl font-bold text-bougie-gold mb-3">Experience Lounge</h3>
-                <p id="exp-info-body" class="text-sm text-bougie-goldLight/90 max-w-md mx-auto mb-6 leading-relaxed"></p>
-                <button onclick="closeModal()" class="px-6 py-2.5 bg-bougie-gold text-bougie-bg font-cinzel font-bold text-xs rounded-xl hover:bg-yellow-300">
-                    Understood
-                </button>
+    <!-- JEOPARDY / GAME MODAL -->
+    <div class="modal-overlay" id="interactiveModal">
+        <div class="modal-body">
+            <span class="modal-close" onclick="closeModal('interactiveModal')">&times;</span>
+            <div id="modalTitle" style="font-family:'Cinzel'; font-size:1.5rem; color:var(--gold-primary);">Question</div>
+            <div class="modal-prompt" id="modalPrompt"></div>
+            <button class="card-btn" id="revealBtn" onclick="revealAnswer()">Reveal Answer</button>
+            <div class="modal-answer" id="modalAnswer"></div>
+        </div>
+    </div>
+
+    <!-- SETUP ENGINE MODAL -->
+    <div class="modal-overlay" id="setupModal">
+        <div class="modal-body">
+            <span class="modal-close" onclick="closeModal('setupModal')">&times;</span>
+            <div style="font-family:'Cinzel'; font-size:1.5rem; color:var(--gold-primary); margin-bottom:20px;">Experience Setup</div>
+            <div class="form-group">
+                <label>Game Mode</label>
+                <select class="form-control" id="setupMode" onchange="updateSetupForm()">
+                    <option value="Team">Team Play</option>
+                    <option value="Individual">Individual Play</option>
+                </select>
             </div>
-
-            <!-- EXPERIENCE 4: GARBA MODAL -->
-            <div id="modal-garba" class="modal-content hidden">
-                <div class="text-center mb-4">
-                    <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-bougie-gold"><i class="fa-solid fa-drum mr-2"></i>Garba & Dandiya Raas Lounge</h3>
-                    <p class="text-xs text-bougie-saffron">Traditional step guides & interactive rhythm synth beat pad!</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-black/50 p-4 rounded-xl border border-bougie-gold/30 space-y-3 text-xs">
-                        <h4 class="font-cinzel text-bougie-gold font-bold">Step Guides:</h4>
-                        <div class="p-2.5 bg-bougie-plum rounded border border-bougie-gold/30">
-                            <strong class="text-bougie-gold block">1. Basic 2-Step (Taali)</strong>
-                            <span class="text-bougie-goldLight/80">Step right, clap hands, step left, clap hands in circular rhythm.</span>
-                        </div>
-                        <div class="p-2.5 bg-bougie-teal rounded border border-bougie-gold/30">
-                            <strong class="text-bougie-gold block">2. Tran Taali (3-Clap Dip)</strong>
-                            <span class="text-bougie-goldLight/80">Three rapid claps with low knee dip on count 3.</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-black/70 p-4 rounded-xl border-2 border-bougie-gold text-center flex flex-col justify-between">
-                        <h4 class="font-cinzel text-bougie-gold text-xs font-bold mb-3">Rhythm Synth Beat Pad</h4>
-                        <div class="grid grid-cols-2 gap-2 mb-3">
-                            <button onclick="playSynthTone(180, 'sine', 0.25)" class="py-3 bg-bougie-saffron text-bougie-bg font-bold rounded-xl gold-border hover:brightness-110">🥁 Dhol Bass</button>
-                            <button onclick="playSynthTone(800, 'triangle', 0.1)" class="py-3 bg-bougie-gold text-bougie-bg font-bold rounded-xl gold-border hover:brightness-110">🥢 Dandiya Clack</button>
-                            <button onclick="playSynthTone(520, 'sine', 0.15)" class="py-3 bg-bougie-teal text-white font-bold rounded-xl hover:brightness-110">🔔 Ghungroo</button>
-                            <button onclick="playSynthTone(350, 'square', 0.15)" class="py-3 bg-bougie-crimson text-white font-bold rounded-xl hover:brightness-110">👏 Taali Clap</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label>Number of Participants / Teams (2 - 6)</label>
+                <input type="number" class="form-control" id="setupCount" min="2" max="6" value="2" onchange="updateSetupForm()">
             </div>
-
-            <!-- GLOBAL LEADERBOARD MODAL -->
-            <div id="modal-leaderboard" class="modal-content hidden">
-                <div class="text-center mb-6">
-                    <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-bougie-gold"><i class="fa-solid fa-trophy mr-2"></i>Global Leaderboard</h3>
-                    <p class="text-xs text-bougie-saffron">Overall team standings across all games</p>
-                </div>
-
-                <div id="leaderboard-list-container" class="space-y-3 mb-6">
-                    <!-- Dynamic JS Rendered -->
-                </div>
-
-                <div class="flex gap-3">
-                    <button onclick="triggerConfetti()" class="flex-1 py-3 bg-gradient-to-r from-bougie-gold via-bougie-saffron to-bougie-goldLight text-bougie-bg font-cinzel font-bold text-xs rounded-xl shadow-lg">
-                        🎉 Celebrate Victory
-                    </button>
-                </div>
-            </div>
-
+            <div id="teamNameInputs"></div>
+            <button class="card-btn" style="margin-top:20px; width:100%;" onclick="saveSetup()">Save & Apply Setup</button>
         </div>
     </div>
 
     <script>
-        /* ==================== GLOBAL TEAMS & APP STATE ==================== */
-        let jsConfetti = null;
-        let activeGameKey = null;
-
-        let registeredTeams = [
-            { id: 'team_1', name: 'Devi Dynasty', score: 0 },
-            { id: 'team_2', name: 'Royal Garba Queens', score: 0 },
-            { id: 'team_3', name: 'Rishi Warriors', score: 0 }
-        ];
-
-        /* ==================== WEB AUDIO SYNTHESIZER ==================== */
-        let audioCtx = null;
-        let bgmInterval = null;
-        let isBgmPlaying = false;
-
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-        }
-
-        function playSynthTone(freq, type = 'sine', duration = 0.2) {
-            try {
-                initAudio();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = type;
-                osc.frequency.value = freq;
-                gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + duration);
-            } catch (e) {}
-        }
-
-        function toggleFestiveSynth() {
-            initAudio();
-            const btnIcon = document.getElementById('bgm-icon');
-            if (isBgmPlaying) {
-                clearInterval(bgmInterval);
-                isBgmPlaying = false;
-                btnIcon.className = "fa-solid fa-music";
-            } else {
-                isBgmPlaying = true;
-                btnIcon.className = "fa-solid fa-compact-disc fa-spin text-bougie-gold";
-                let count = 0;
-                bgmInterval = setInterval(() => {
-                    count = (count + 1) % 4;
-                    if (count === 0 || count === 2) playSynthTone(170, 'sine', 0.2);
-                    else if (count === 1) playSynthTone(750, 'triangle', 0.1);
-                    else playSynthTone(500, 'sine', 0.15);
-                }, 420);
-            }
-        }
-
-        /* ==================== GAME SETUP WORKFLOW ==================== */
-        const gameTitles = {
-            'quickwits': 'QuickWits (Rapid Fire)',
-            'jeopardy': 'Navratri & Mythology Jeopardy',
-            'golu': 'Golu Match & Place Challenge',
-            'quiz': 'Fastest Finger First MCQ Trivia'
-        };
-
-        function triggerGameSetup(gameKey) {
-            activeGameKey = gameKey;
-            openModal('modal-game-setup');
-            document.getElementById('setup-game-title').textContent = gameTitles[gameKey] || 'Game Setup';
-            document.getElementById('setup-count-select').value = registeredTeams.length;
-            renderSetupInputs();
-        }
-
-        function renderSetupInputs() {
-            const count = parseInt(document.getElementById('setup-count-select').value);
-            const container = document.getElementById('setup-names-container');
-            container.innerHTML = '';
-
-            for (let i = 0; i < count; i++) {
-                const existingName = registeredTeams[i] ? registeredTeams[i].name : `Team ${i + 1}`;
-                const div = document.createElement('div');
-                div.innerHTML = `
-                    <label class="block text-[11px] font-cinzel text-bougie-gold mb-1">Team / Player ${i + 1} Name</label>
-                    <input type="text" id="setup-input-${i}" value="${existingName}" class="w-full bg-bougie-bg border border-bougie-gold/50 rounded-lg p-2.5 text-xs text-white focus:border-bougie-gold focus:outline-none">
-                `;
-                container.appendChild(div);
-            }
-        }
-
-        function confirmSetupAndLaunch() {
-            const count = parseInt(document.getElementById('setup-count-select').value);
-            const newTeams = [];
-
-            for (let i = 0; i < count; i++) {
-                const name = document.getElementById(`setup-input-${i}`).value.trim() || `Team ${i + 1}`;
-                const oldScore = registeredTeams[i] ? registeredTeams[i].score : 0;
-                newTeams.push({ id: `team_${i + 1}`, name, score: oldScore });
-            }
-
-            registeredTeams = newTeams;
-            updateHeaderAndScores();
-            openActivityModal(activeGameKey);
-        }
-
-        function showExperienceInfo(title, body) {
-            document.getElementById('exp-info-title').textContent = title;
-            document.getElementById('exp-info-body').textContent = body;
-            openModal('modal-exp-info');
-        }
-
-        /* ==================== SCOREKEEPING & LEADERBOARD ==================== */
-        function addTeamPoints(teamId, pts) {
-            const team = registeredTeams.find(t => t.id === teamId);
-            if (team) {
-                team.score = Math.max(0, team.score + pts);
-                updateHeaderAndScores();
-                playSynthTone(750, 'sine', 0.15);
-            }
-        }
-
-        function updateHeaderAndScores() {
-            // Header Live Bar
-            const headerList = document.getElementById('header-teams-list');
-            if (headerList) {
-                headerList.innerHTML = '';
-                registeredTeams.forEach(t => {
-                    const item = document.createElement('div');
-                    item.className = "flex items-center gap-1.5";
-                    item.innerHTML = `<span class="text-white">${t.name}:</span> <span class="text-bougie-gold font-bold">${t.score}</span>`;
-                    headerList.appendChild(item);
-                });
-            }
-
-            // QuickWits Score Bar
-            const qwBar = document.getElementById('qw-scores-bar');
-            if (qwBar) {
-                qwBar.innerHTML = '';
-                registeredTeams.forEach(t => {
-                    const div = document.createElement('div');
-                    div.className = "p-2 bg-bougie-plum rounded-lg border border-bougie-gold/30 text-center min-w-[110px]";
-                    div.innerHTML = `
-                        <div class="text-[10px] font-cinzel text-bougie-saffron font-bold">${t.name}</div>
-                        <div class="font-bold text-lg text-bougie-gold">${t.score}</div>
-                        <div class="flex justify-center gap-1 mt-1">
-                            <button onclick="addTeamPoints('${t.id}', 10)" class="px-2 py-0.5 bg-emerald-800 text-white text-[10px] rounded">+10</button>
-                            <button onclick="addTeamPoints('${t.id}', -10)" class="px-2 py-0.5 bg-rose-900 text-white text-[10px] rounded">-10</button>
-                        </div>
-                    `;
-                    qwBar.appendChild(div);
-                });
-            }
-
-            // Jeopardy Score Bar
-            const jepBar = document.getElementById('jep-scores-bar');
-            if (jepBar) {
-                jepBar.innerHTML = '';
-                registeredTeams.forEach(t => {
-                    const span = document.createElement('div');
-                    span.innerHTML = `<span class="text-bougie-saffron font-semibold">${t.name}: </span><span class="text-bougie-gold font-bold">${t.score} pts</span>`;
-                    jepBar.appendChild(span);
-                });
-            }
-
-            // Leaderboard List
-            const sorted = [...registeredTeams].sort((a, b) => b.score - a.score);
-            const lbContainer = document.getElementById('leaderboard-list-container');
-            if (lbContainer) {
-                lbContainer.innerHTML = '';
-                sorted.forEach((team, rank) => {
-                    const row = document.createElement('div');
-                    row.className = "p-3 bg-black/50 border border-bougie-gold/40 rounded-xl flex items-center justify-between font-cinzel text-xs";
-                    row.innerHTML = `
-                        <div class="flex items-center gap-3">
-                            <span class="w-6 h-6 rounded-full bg-bougie-gold text-bougie-bg font-bold flex items-center justify-center">${rank + 1}</span>
-                            <span class="font-bold text-bougie-gold text-sm">${team.name}</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-base font-bold text-white">${team.score} pts</span>
-                            <button onclick="addTeamPoints('${team.id}', 100)" class="px-2 py-0.5 bg-emerald-800 text-white rounded text-[10px]">+100</button>
-                            <button onclick="addTeamPoints('${team.id}', -100)" class="px-2 py-0.5 bg-rose-900 text-white rounded text-[10px]">-100</button>
-                        </div>
-                    `;
-                    lbContainer.appendChild(row);
-                });
-            }
-        }
-
-        function openGlobalLeaderboard() {
-            updateHeaderAndScores();
-            openModal('modal-leaderboard');
-        }
-
-        function triggerConfetti() {
-            if (!jsConfetti) jsConfetti = new JSConfetti();
-            jsConfetti.addConfetti({
-                emojis: ['✨', '🪔', '👑', '🎉', '🌸'],
-                confettiNumber: 60,
-            });
-        }
-
-        /* ==================== MODAL & TAB MANAGERS ==================== */
-        function filterActivities(type) {
-            const cards = document.querySelectorAll('.activity-card');
-            const tabs = document.querySelectorAll('.tab-btn');
-
-            tabs.forEach(t => {
-                t.classList.remove('bg-bougie-gold', 'text-bougie-bg');
-                t.classList.add('bg-bougie-plum/90', 'text-bougie-gold');
-            });
-
-            document.getElementById(`tab-${type}`).classList.add('bg-bougie-gold', 'text-bougie-bg');
-            document.getElementById(`tab-${type}`).classList.remove('bg-bougie-plum/90', 'text-bougie-gold');
-
-            cards.forEach(card => {
-                if (type === 'all' || card.dataset.type === type) card.style.display = 'flex';
-                else card.style.display = 'none';
-            });
-        }
-
-        function openActivityModal(key) {
-            openModal(`modal-${key}`);
-            updateHeaderAndScores();
-            if (key === 'quickwits') initQuickwitsTimer();
-            if (key === 'jeopardy') initJeopardyGrid5x5();
-            if (key === 'golu') initGoluGame();
-            if (key === 'quiz') startQuizGame();
-        }
-
-        function openModal(id) {
-            document.getElementById('modal-wrapper').classList.remove('hidden');
-            document.querySelectorAll('.modal-content').forEach(m => m.classList.add('hidden'));
-            const target = document.getElementById(id);
-            if (target) target.classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('modal-wrapper').classList.add('hidden');
-        }
-
-        /* ==================== GAME 1: QUICKWITS ==================== */
-        const qwPrompts = [
-            { prompt: "Name one of the 9 sacred forms (Navadurga) of Goddess Durga", answers: "Shailaputri, Brahmacharini, Chandraghanta, Kushmanda, Skandamata, Katyayani, Kalaratri, Mahagauri, Siddhidatri" },
-            { prompt: "Name a divine weapon associated with Lord Shiva or Goddess Parvati", answers: "Trishula (Trident), Chakra, Dhanush, Khadga (Sword), Vel (Spear)" },
-            { prompt: "Name a traditional Golu prasadam or Navratri sweet", answers: "Sundal, Payasam, Chakra Pongal, Curd Rice, Laddu, Halwa" },
-            { prompt: "Name a traditional Indian musical instrument played during Garba", answers: "Dholak, Dhol, Veena, Harmonium, Flute, Manjira, Nagada" }
-        ];
-
-        let qwTimerInterval = null;
-
-        function initQuickwitsTimer() {
-            document.getElementById('qw-timer-bar').style.width = '100%';
-        }
-
-        function drawQwPrompt() {
-            playSynthTone(600, 'sine', 0.15);
-            const idx = Math.floor(Math.random() * qwPrompts.length);
-            const p = qwPrompts[idx];
-            document.getElementById('qw-prompt-text').textContent = p.prompt;
-            document.getElementById('qw-answers-text').textContent = p.answers;
-            document.getElementById('qw-answers-box').classList.add('hidden');
-
-            clearInterval(qwTimerInterval);
-            const timerBar = document.getElementById('qw-timer-bar');
-            let remaining = 100;
-            qwTimerInterval = setInterval(() => {
-                remaining -= 2;
-                timerBar.style.width = `${remaining}%`;
-                if (remaining <= 0) {
-                    clearInterval(qwTimerInterval);
-                    playSynthTone(250, 'square', 0.3);
-                }
-            }, 200);
-        }
-
-        function toggleQwAnswers() {
-            document.getElementById('qw-answers-box').classList.toggle('hidden');
-        }
-
-        /* ==================== GAME 2: JEOPARDY DATA (25 QUESTIONS) ==================== */
-        const jeopardyCategories = [
+        // Data Structure for 5x5 Jeopardy
+        const jeopardyData = [
             {
-                cat: "Gods of Cinema",
-                items: [
-                    { pts: 100, q: "This 2008 sci-fi thriller features Kamal Haasan portraying 10 interconnected roles bound by chaos theory.", a: "Dasavathaaram" },
-                    { pts: 200, q: "This 1991 cult film modernizes the legendary bond and tragic rivalry between Karna and Arjuna from the Mahabharata.", a: "Thalapathy" },
-                    { pts: 300, q: "This milestone 1964 film starred Sivaji Ganesan playing 9 distinct characters, each depicting a different Navarasa.", a: "Navaratri" },
-                    { pts: 400, q: "Which South Indian actress holds the record for portraying the divine Goddess Amman / Shakti in the maximum number of South Indian devotional films?", a: "Ramya Krishnan" },
-                    { pts: 500, q: "This 1966 classic features a high-stakes divine debate between Goddesses Saraswathi, Lakshmi, and Parvati over whether Knowledge, Wealth, or Strength reigns supreme.", a: "Saraswathi Sabatham" }
+                theme: "Gods of Cinema",
+                questions: [
+                    { points: 100, prompt: "In this 2008 blockbuster, Kamal Haasan plays 10 distinct roles, including a scientist, a priest, and a CIA officer.", answer: "Dasavathaaram" },
+                    { points: 200, prompt: "Mani Ratnam's iconic film starring Rajinikanth and Mammootty is based on the friendship between Karna and Duryodhana.", answer: "Thalapathy" },
+                    { points: 300, prompt: "Sivaji Ganesan played 9 different roles in this classic 1964 Tamil movie depicting various emotions (Rasas).", answer: "Navaratri" },
+                    { points: 400, prompt: "This veteran actress delivered an unforgettable performance as the fierce Queen Mother Sivagami in Baahubali.", answer: "Ramya Krishnan" },
+                    { points: 500, prompt: "Sivaji Ganesan played Narada in this 1965 mythological film that dramatizes a debate on who is superior: Knowledge, Wealth, or Power.", answer: "Saraswathi Sabatham" }
                 ]
             },
             {
-                cat: "Epic Bonds",
-                items: [
-                    { pts: 100, q: "What is the relationship between Siva and Vishnu?", a: "Brothers in law" },
-                    { pts: 200, q: "Name Rama's sons.", a: "Luv and Kush" },
-                    { pts: 300, q: "X and Y decided to give birth to Lord Ayyappa to reign the demon Mahishi. Identify X and Y.", a: "Shiva & Vishnu (as Mohini)" },
-                    { pts: 400, q: "X is a mythological hindu deity who appears in the state insignia of India, Indonesia and Thailand. X's nephew is Y who comes in the Ramayana. ID X and Y.", a: "Garuda & Jatayu" },
-                    { pts: 500, q: "X and Y are twin brother sisters born Surya and Sanjna, X represents death, Y represents Life with a river after her name.", a: "Yamaraj & Yamuna (Jamuna)" }
+                theme: "Epic Bonds",
+                questions: [
+                    { points: 100, prompt: "Lord Rama and King Sugriva cemented their sacred alliance after meeting through this loyal monkey deity.", answer: "Brothers-in-law (Allies / Sugriva)" },
+                    { points: 200, prompt: "These twin sons of Lord Rama and Sita grew up in Sage Valmiki's ashram and captured the Ashwamedha horse.", answer: "Luv and Kush" },
+                    { points: 300, prompt: "Lord Ayyappa (Hariharaputra) was born from the sacred divine union of Lord Shiva and Lord Vishnu in this form.", answer: "Mohini" },
+                    { points: 400, prompt: "These two divine eagle brothers raced toward the sun in their youth; the elder sacrificed his wings to protect the younger.", answer: "Garuda & Jatayu (or Sampati & Jatayu)" },
+                    { points: 500, prompt: "This deity of death and his divine river goddess sister celebrate their brother-sister bond during Yama Dwitiya.", answer: "Yamaraj & Yamuna (Jamuna)" }
                 ]
             },
             {
-                cat: "One Letter Away",
-                items: [
-                    { pts: 100, q: "The supreme ascetic deity who performs the cosmic dance is ______, whereas the central heroine of the Ramayana tested by fire is ______.", a: "Siva, Sita" },
-                    { pts: 200, q: "The virtuous hero of the Ramayana was ______, while the mighty king of Lanka who opposed him was ______.", a: "Raman, Ravan" },
-                    { pts: 300, q: "The Good king on the bad side of Mahabharata is ______, and the well-wisher of the good side is ______.", a: "Karna, Kanna" },
-                    { pts: 400, q: "The destroyer lord associated with Mount Kailash is ______, while the preserver deity who slumbers on the cosmic serpent is ______.", a: "Hara, Hari" },
-                    { pts: 500, q: "The invincible monkey king slain by Rama's hidden arrow was ______, whereas the goddess of knowledge and speech is ______.", a: "Vali, Vani" }
+                theme: "One Letter Away",
+                questions: [
+                    { points: 100, prompt: "Change one letter in Lord Shiva's name to get the name of Lord Rama's divine consort.", answer: "Siva -> Sita" },
+                    { points: 200, prompt: "Change one letter in the hero of the Ramayana to name the ten-headed King of Lanka.", answer: "Raman -> Ravan" },
+                    { points: 300, prompt: "Change one letter in the name of the tragic tragic hero of Mahabharata to get an affectionate Tamil name for Krishna.", answer: "Karna -> Kanna" },
+                    { points: 400, prompt: "Change one letter in a name for Shiva to get a name for Vishnu.", answer: "Hara -> Hari" },
+                    { points: 500, prompt: "Change one letter in the name of Sugriva's powerful elder brother to get the Goddess of Knowledge.", answer: "Vali -> Vani" }
                 ]
             },
             {
-                cat: "This is how we Navratri",
-                items: [
-                    { pts: 100, q: "The traditional Navratri practice of setting up stepped, multi-tiered wooden platforms to display clay dolls of deities, mythological stories, and village scenes in homes across Tamil Nadu, Andhra Pradesh, and Karnataka.", a: "Golu" },
-                    { pts: 200, q: "In West Bengal, the final five days of Navratri culminate in this grand UNESCO-recognized festival featuring elaborate themed temporary shrines (pandals), Dhunuchi Naach dances, and the ritual of Sindoor Khela.", a: "Durga Puja" },
-                    { pts: 300, q: "Native to Gujarat, these high-energy folk dances performed in concentric circles around a lit lamp or Goddess idol involve rhythmic clapping during all nine nights.", a: "Garba" },
-                    { pts: 400, q: "Celebrated in Karnataka, this royal 10-day state festival highlights Goddess Chamundeshwari slaying Mahishasura and culminates in a grand parade featuring an elephant carrying a 750-kg golden throne.", a: "Mysuru Dasara" },
-                    { pts: 500, q: "Across Northern India, this 9-night dramatic open-air performance depicts the life and deeds of Lord Rama based on the Ramcharitmanas, culminating on Dussehra with the burning of giant effigies of Ravana.", a: "Ramlila" }
+                theme: "This is how we Navratri",
+                questions: [
+                    { points: 100, prompt: "The traditional practice of setting up stepped wooden platforms to display clay dolls in Tamil Nadu & South India.", answer: "Golu" },
+                    { points: 200, prompt: "UNESCO-recognized grand festival in West Bengal featuring themed temporary shrines (pandals) and Dhunuchi Naach.", answer: "Durga Puja" },
+                    { points: 300, prompt: "Native to Gujarat, this high-energy folk dance performed in concentric circles around a lit lamp involves rhythmic clapping.", answer: "Garba" },
+                    { points: 400, prompt: "Karnataka's 10-day state festival celebrating Goddess Chamundeshwari, featuring a parade with an elephant carrying a 750-kg throne.", answer: "Mysuru Dasara" },
+                    { points: 500, prompt: "Dramatic open-air performance across Northern India depicting the life of Lord Rama, ending on Dussehra with effigy burning.", answer: "Ramlila" }
                 ]
             },
             {
-                cat: "Gopuram GeoGuesser",
-                items: [
-                    { pts: 100, q: "", img: "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=800&q=80", a: "Tirupati Venkateswara Temple (Tirumala)" },
-                    { pts: 200, q: "", img: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80", a: "Trichy Ucchi Pillayar Temple (Rockfort)" },
-                    { pts: 300, q: "", img: "https://images.unsplash.com/photo-1600100397608-f010e423b961?auto=format&fit=crop&w=800&q=80", a: "Thanjavur Brihadeeswarar Temple (Big Temple)" },
-                    { pts: 400, q: "", img: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=800&q=80", a: "Shravanabelagola (Gommateshwara Temple)" },
-                    { pts: 500, q: "", img: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=800&q=80", a: "Murudeshwar Temple (Karnataka)" }
+                theme: "Gopuram GeoGuesser",
+                questions: [
+                    { points: 100, prompt: "", image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTERUTExIWFhUXGB0bGBcYGBgbGxofGBoYGh8ZGxsYHSohGholHRsdITEiJSkrLi4uGyAzODMtNygtLisBCgoKDg0OGxAQGy0lICUtLy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLi0tLS0tLf/AABEIALcBEwMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAADAAIEBQYBB//EAEoQAAECBAMEBgcDCgQFBQEAAAECEQADITEEEkEFIlFhBhNxgZGhMkKxwdHh8BWpvq/9oADAMBAWar/zS2a33jP3f/Ovd4/Y/2f43s3AAMv1q/O13/44S9m/e5f+mZ3j9j/Z/jewEAt5S/l29v+qBvP/e/f8s5q5s7/AG3fP/C4A2H3p/8A31kZz/3/AH8s3M7/AGffp84L2b/s/wAb2LgBl/P9a3X/AGL6yJ0mY4e8L1P0g+f4Q7s32mRnH/f0/aIUn3l/K41P1i2w851t2D4xS9m/0u4eXN6b3iL/6aX8v3+5/s/x3YuADv8AWs/O59sKdn3nS1648NfPq/x+0082f/f5o0M/D1y/H/u/A3mPne/7mB/Z10p9f/vSgU/0038L2RnH2H3a+3p1Uufi92/OAnE1qPevL1a7yvj85s1f6Yfxf47svAC30/vTjE+V3fL4w/s0mff/Lq/GInF1Y08fXm54/t9x3Z35v9kSZT5n/v15aebS3O/Iwns7f4a/s3M4O//pAn+I/e5xZz84T2bf/AOfz1XfO4S3n505N/A4e0p/x/s3snAFfP615QGbiqv4Xvfx+S+6Nf0I3sH3/AH3xPZz/AN/p362O3/M7fIn5cO7f2E05yffv09+H/O/fXv3f/O49m/7P8b2DgAMfn54TIn/s66fve+L1p0w8Lz9sS/A3v/AL6eL3+p7Of8P/M6fO59X/fE32b21/x3Y2AJmE/aPfv82G6I51h1Plx5V5a399ZOf8A93/e/k4A7L6Nf2fLw1kZ0134Xv3M/mX6G8N7P/d633219f8Ad2XgAnfQd/L45wSVP3h8/s/P3j2b+91P53Xv950p41P2Y50iA/d1q452v2fE2I1J3u/Nq9244/U4mBf2e6l7p3s/x3YmAB1+y/x3Y9n45/A8418/A5o8/f8/wCeP1fP/O/1f4s+fP3/AL/POfp93f/p2+k9m/vdT/P+9m5E/fG34x1E23f8vnF72bf8bfA9m44T4aZ33/H7p+eMOfI15v5+N8f8A97yP0N4m38ffy3/f/eL44s23mPq/3rI3m/vS/N7/AL08/v1/2O6P+y/G9iYIeL2/XPhvO404a/m45a8fL357v54u9nH2X52f2X8AAn/UfXl5v8A4/3d16n2ffy3qI/d7/P582/e93f+/W11b2ff6X78/m6/f378/k8A4L/vT6/c8d2345/d1q4m//AE+/c/s83n8934y/33+D/f/f8D2b+91P5/2O6M+2v53v7f54p/0x/3S/f8A+mY+/f8A6ff2X353fzzef325+/e0e3fX/Xv254X4eL3f3s3x4fD42fA4e05/1X7/ALy3/9k=" }
                 ]
             }
         ];
 
-        let activeJepQ = null;
-
-        function initJeopardyGrid5x5() {
-            updateHeaderAndScores();
-            const grid = document.getElementById('jeopardy-grid-5x5');
-            grid.innerHTML = '';
-
-            // Header Categories
-            jeopardyCategories.forEach(c => {
-                const head = document.createElement('div');
-                head.className = "bg-bougie-plum border border-bougie-gold p-2 text-xs font-cinzel font-bold text-bougie-gold rounded-lg shadow flex items-center justify-center min-h-[48px]";
-                head.textContent = c.cat;
-                grid.appendChild(head);
-            });
-
-            // 5 Tier Rows ($100 - $500)
-            for (let r = 0; r < 5; r++) {
-                jeopardyCategories.forEach((col) => {
-                    const item = col.items[r];
-                    const btn = document.createElement('button');
-                    btn.className = "p-3 bg-bougie-crimson/80 border border-bougie-gold/60 text-bougie-gold font-cinzel font-bold text-sm rounded-lg hover:bg-bougie-gold hover:text-bougie-bg transition shadow";
-                    btn.textContent = `$${item.pts}`;
-                    btn.onclick = () => showJepQuestionCard(col.cat, item, btn);
-                    grid.appendChild(btn);
-                });
-            }
-        }
-
-        function showJepQuestionCard(cat, item, btnRef) {
-            activeJepQ = { item, btnRef };
-            const modal = document.getElementById('jep-q-modal');
-            modal.classList.remove('hidden');
-            document.getElementById('jep-card-cat').textContent = `${cat} - $${item.pts}`;
-
-            const qText = document.getElementById('jep-card-text');
-            const imgBox = document.getElementById('jep-card-img-container');
-            const imgEl = document.getElementById('jep-card-img');
-
-            if (item.img) {
-                qText.textContent = '';
-                imgBox.classList.remove('hidden');
-                imgEl.src = item.img;
-            } else {
-                imgBox.classList.add('hidden');
-                qText.textContent = item.q;
-            }
-
-            document.getElementById('jep-card-ans').textContent = `Answer: ${item.a}`;
-            document.getElementById('jep-card-ans').classList.add('hidden');
-
-            const btnBox = document.getElementById('jep-award-btns');
-            btnBox.innerHTML = '';
-            registeredTeams.forEach(t => {
-                const b = document.createElement('button');
-                b.className = "px-3 py-1.5 bg-bougie-gold text-bougie-bg font-cinzel font-bold text-xs rounded hover:bg-yellow-300";
-                b.textContent = `+ ${t.name}`;
-                b.onclick = () => awardJepPoints(t.id, item.pts);
-                btnBox.appendChild(b);
-            });
-        }
-
-        function toggleJepAns() {
-            document.getElementById('jep-card-ans').classList.toggle('hidden');
-        }
-
-        function awardJepPoints(teamId, pts) {
-            if (activeJepQ) {
-                addTeamPoints(teamId, pts);
-                activeJepQ.btnRef.disabled = true;
-                activeJepQ.btnRef.className = "p-3 bg-black/50 border border-gray-700 text-gray-600 font-cinzel text-sm rounded-lg cursor-not-allowed";
-                document.getElementById('jep-q-modal').classList.add('hidden');
-            }
-        }
-
-        /* ==================== GAME 3: GOLU SIMULATOR ==================== */
-        const goluIdols = [
-            { id: 1, name: "Goddess Durga", tier: 1, icon: "👑" },
-            { id: 2, name: "Goddess Lakshmi", tier: 1, icon: "🪷" },
-            { id: 3, name: "Goddess Saraswathi", tier: 1, icon: "📜" },
-            { id: 4, name: "Lord Ganesha", tier: 2, icon: "🐘" },
-            { id: 5, name: "Marapachi Raja Doll", tier: 3, icon: "🎎" },
-            { id: 6, name: "Marapachi Rani Doll", tier: 3, icon: "🎎" }
+        // State Management
+        let teams = [
+            { name: "Devi Dynasty", score: 0 },
+            { name: "Rishi Warriors", score: 0 }
         ];
 
-        let goluPlaced = 0;
-
-        function initGoluGame() {
-            goluPlaced = 0;
-            document.getElementById('golu-score').textContent = `0 / ${goluIdols.length}`;
-            const pool = document.getElementById('golu-idol-pool');
-            pool.innerHTML = '';
-
-            goluIdols.forEach(idol => {
-                const d = document.createElement('div');
-                d.className = "p-2.5 bg-bougie-plum border border-bougie-gold/40 rounded-lg text-xs font-cinzel font-bold text-bougie-gold flex items-center justify-between cursor-pointer hover:bg-bougie-crimson transition";
-                d.innerHTML = `<span>${idol.icon} ${idol.name}</span> <span class="text-[10px] text-bougie-saffron">Tier ${idol.tier}</span>`;
-                d.onclick = () => placeGoluIdol(idol, d);
-                pool.appendChild(d);
-            });
-
-            document.querySelectorAll('.golu-step .idol-slot').forEach(s => s.innerHTML = '');
-        }
-
-        function placeGoluIdol(idol, el) {
-            const slot = document.querySelector(`.golu-step[data-step="${idol.tier}"] .idol-slot`);
-            if (slot) {
-                const badge = document.createElement('span');
-                badge.className = "px-2.5 py-1 bg-bougie-gold text-bougie-bg rounded-full text-xs font-bold font-cinzel shadow";
-                badge.textContent = `${idol.icon} ${idol.name}`;
-                slot.appendChild(badge);
-                el.remove();
-                goluPlaced++;
-                document.getElementById('golu-score').textContent = `${goluPlaced} / ${goluIdols.length}`;
-                playSynthTone(550, 'sine', 0.15);
-            }
-        }
-
-        /* ==================== GAME 4: MCQ SPEED QUIZ ==================== */
-        const quizList = [
-            { q: "What does 'Navratri' translate to in Sanskrit?", opts: ["Nine Nights", "Nine Days", "Festive Lights", "Divine Victory"], correct: 0 },
-            { q: "Which form of Durga is worshipped on Day 1?", opts: ["Brahmacharini", "Shailaputri", "Chandraghanta", "Kushmanda"], correct: 1 },
-            { q: "Primary Golu prasadam offered in South India?", opts: ["Jalebi", "Sundal (Legumes)", "Gulab Jamun", "Samosa"], correct: 1 }
-        ];
-
-        let quizIdx = 0;
-        let quizScore = 0;
-
-        function startQuizGame() {
-            quizIdx = 0;
-            quizScore = 0;
-            renderQuizQ();
-        }
-
-        function renderQuizQ() {
-            if (quizIdx >= quizList.length) {
-                document.getElementById('quiz-question-text').textContent = "🎉 Quiz Finished!";
-                document.getElementById('quiz-options-container').innerHTML = `<p class="text-bougie-gold font-bold text-center col-span-2 text-sm">Round Final Score: ${quizScore} pts</p>`;
-                return;
-            }
-
-            const curr = quizList[quizIdx];
-            document.getElementById('quiz-progress').textContent = `Question ${quizIdx + 1} / ${quizList.length}`;
-            document.getElementById('quiz-score').textContent = quizScore;
-            document.getElementById('quiz-question-text').textContent = curr.q;
-            document.getElementById('quiz-feedback').textContent = '';
-
-            const container = document.getElementById('quiz-options-container');
-            container.innerHTML = '';
-
-            curr.opts.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = "py-3 px-4 bg-bougie-plum border border-bougie-gold/60 rounded-xl text-xs sm:text-sm text-bougie-gold font-semibold hover:bg-bougie-gold hover:text-bougie-bg transition";
-                btn.textContent = opt;
-                btn.onclick = () => checkQuizAns(idx);
-                container.appendChild(btn);
-            });
-        }
-
-        function checkQuizAns(idx) {
-            const curr = quizList[quizIdx];
-            const fb = document.getElementById('quiz-feedback');
-            if (idx === curr.correct) {
-                quizScore += 100;
-                fb.textContent = "✨ Correct! +100 Points";
-                fb.className = "text-green-400 font-bold";
-                playSynthTone(850, 'sine', 0.2);
-            } else {
-                fb.textContent = "❌ Incorrect!";
-                fb.className = "text-red-400 font-bold";
-                playSynthTone(200, 'square', 0.2);
-            }
-            quizIdx++;
-            setTimeout(renderQuizQ, 1000);
-        }
-
-        /* ==================== PETAL BACKGROUND ANIMATION ==================== */
-        function initPetalCanvas() {
-            const canvas = document.getElementById('petal-canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            const petals = Array.from({ length: 18 }, () => ({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                r: Math.random() * 5 + 3,
-                d: Math.random() * 1.5 + 0.5,
-                color: Math.random() > 0.5 ? '#f3d38c' : '#e85d04'
-            }));
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                petals.forEach(p => {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fillStyle = p.color;
-                    ctx.globalAlpha = 0.5;
-                    ctx.fill();
-                    p.y += p.d;
-                    if (p.y > canvas.height) p.y = -10;
-                });
-                requestAnimationFrame(animate);
-            }
-            animate();
-        }
-
+        // Initialize App
         window.onload = function() {
-            initPetalCanvas();
-            updateHeaderAndScores();
+            renderJeopardyBoard();
+            renderScoreboard();
         };
+
+        // Render Scoreboard
+        function renderScoreboard() {
+            const bar = document.getElementById('scoreboardBar');
+            bar.innerHTML = '';
+            teams.forEach((team, index) => {
+                const badge = document.createElement('div');
+                badge.className = 'team-badge';
+                badge.innerHTML = `
+                    <span class="team-name">${team.name}</span>
+                    <span class="team-score" id="score-${index}">${team.score}</span>
+                    <button class="score-ctrl" onclick="adjustScore(${index}, 100)">+</button>
+                    <button class="score-ctrl" onclick="adjustScore(${index}, -100)">-</button>
+                `;
+                bar.appendChild(badge);
+            });
+        }
+
+        // Adjust Score
+        function adjustScore(index, delta) {
+            teams[index].score += delta;
+            document.getElementById(`score-${index}`).innerText = teams[index].score;
+            if (delta > 0) confetti({ particleCount: 40, spread: 60, origin: { y: 0.2 } });
+        }
+
+        // Render Jeopardy Board
+        function renderJeopardyBoard() {
+            const board = document.getElementById('jeopardyBoard');
+            board.innerHTML = '';
+
+            jeopardyData.forEach((cat, colIdx) => {
+                const col = document.createElement('div');
+                col.className = 'jeopardy-column';
+
+                const header = document.createElement('div');
+                header.className = 'jeopardy-header';
+                header.innerText = cat.theme;
+                col.appendChild(header);
+
+                cat.questions.forEach((q, rowIdx) => {
+                    const card = document.createElement('div');
+                    card.className = 'jeopardy-card';
+                    card.innerText = `$${q.points}`;
+                    card.id = `jcard-${colIdx}-${rowIdx}`;
+                    card.onclick = () => openJeopardyQuestion(colIdx, rowIdx);
+                    col.appendChild(card);
+                });
+
+                board.appendChild(col);
+            });
+        }
+
+        // Open Jeopardy Question
+        function openJeopardyQuestion(colIdx, rowIdx) {
+            const card = document.getElementById(`jcard-${colIdx}-${rowIdx}`);
+            if (card.classList.contains('used')) return;
+
+            const qData = jeopardyData[colIdx].questions[rowIdx];
+            document.getElementById('modalTitle').innerText = `${jeopardyData[colIdx].theme} - $${qData.points}`;
+            
+            let promptHTML = '';
+            if (qData.image) {
+                promptHTML += `<img src="${qData.image}" alt="Temple Clue"><br>`;
+            }
+            if (qData.prompt) {
+                promptHTML += qData.prompt;
+            }
+            
+            document.getElementById('modalPrompt').innerHTML = promptHTML;
+            document.getElementById('modalAnswer').innerText = qData.answer;
+            document.getElementById('modalAnswer').style.display = 'none';
+            document.getElementById('revealBtn').style.display = 'inline-block';
+
+            card.classList.add('used');
+            document.getElementById('interactiveModal').classList.add('active');
+        }
+
+        function revealAnswer() {
+            document.getElementById('modalAnswer').style.display = 'block';
+            document.getElementById('revealBtn').style.display = 'none';
+        }
+
+        // Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Modal Handlers
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        // Setup Engine Modal
+        function openSetupModal() {
+            updateSetupForm();
+            document.getElementById('setupModal').classList.add('active');
+        }
+
+        function updateSetupForm() {
+            const count = parseInt(document.getElementById('setupCount').value) || 2;
+            const container = document.getElementById('teamNameInputs');
+            container.innerHTML = '';
+
+            for (let i = 0; i < count; i++) {
+                const group = document.createElement('div');
+                group.className = 'form-group';
+                group.innerHTML = `
+                    <label>Team/Player ${i + 1} Name</label>
+                    <input type="text" class="form-control setup-team-input" value="${teams[i] ? teams[i].name : 'Team ' + (i + 1)}">
+                `;
+                container.appendChild(group);
+            }
+        }
+
+        function saveSetup() {
+            const inputs = document.querySelectorAll('.setup-team-input');
+            teams = [];
+            inputs.forEach((input) => {
+                teams.push({ name: input.value || 'Unnamed Team', score: 0 });
+            });
+            renderScoreboard();
+            closeModal('setupModal');
+        }
+
+        // Generic Game Launcher Modal
+        function openGameModal(gameType) {
+            document.getElementById('modalTitle').innerText = gameType;
+            let content = '';
+            if (gameType === 'QuickWits') {
+                content = "Draw a card! Prompt: Name 3 avatars of Lord Vishnu within 10 seconds!";
+            } else if (gameType === 'Golu') {
+                content = "3-Tier Golu Step Challenge: Place Divine Idols on Tier 1 (Top), Kalash in Center, and Village Scenes on Tier 3 (Bottom).";
+            } else if (gameType === 'FastestFinger') {
+                content = "Buzzer Trivia: Which goddess was born from the cosmic ocean during Samudra Manthan?";
+            }
+            document.getElementById('modalPrompt').innerText = content;
+            document.getElementById('modalAnswer').innerText = "Host Key Ready";
+            document.getElementById('modalAnswer').style.display = 'none';
+            document.getElementById('revealBtn').style.display = 'inline-block';
+            document.getElementById('interactiveModal').classList.add('active');
+        }
+
+        // Web Audio Synthesizer
+        let audioCtx = null;
+        function playPadSound(freq) {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.5);
+        }
+
+        let synthInterval = null;
+        function toggleSynthBeat() {
+            if (synthInterval) {
+                clearInterval(synthInterval);
+                synthInterval = null;
+                alert("Ambient Dhol Synth Stopped");
+            } else {
+                synthInterval = setInterval(() => {
+                    playPadSound(180);
+                }, 600);
+                alert("Ambient Dhol Synth Started 🎵");
+            }
+        }
+
+        // Keyboard Rhythm Binding
+        window.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'a') playPadSound(220);
+            if (e.key.toLowerCase() === 's') playPadSound(440);
+            if (e.key.toLowerCase() === 'd') playPadSound(880);
+            if (e.key.toLowerCase() === 'f') playPadSound(330);
+        });
     </script>
 </body>
 </html>
