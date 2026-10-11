@@ -19,12 +19,7 @@
             --glass-border: rgba(212, 175, 55, 0.4);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
 
         body {
             background-color: var(--bg-indigo);
@@ -78,11 +73,7 @@
             letter-spacing: 2px;
         }
 
-        .header-controls {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
+        .header-controls { display: flex; gap: 15px; align-items: center; }
 
         .audio-btn {
             background: transparent;
@@ -95,10 +86,7 @@
             transition: all 0.3s;
         }
 
-        .audio-btn:hover {
-            background: var(--gold-primary);
-            color: var(--bg-indigo);
-        }
+        .audio-btn:hover { background: var(--gold-primary); color: var(--bg-indigo); }
 
         .leaderboard-bar {
             background: var(--glass-bg);
@@ -163,13 +151,7 @@
             margin: 10px auto 0;
         }
 
-        .nav-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
+        .nav-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
 
         .tab-btn {
             background: var(--glass-bg);
@@ -219,19 +201,8 @@
             box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25);
         }
 
-        .card-header {
-            font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            color: var(--gold-light);
-            margin-bottom: 12px;
-        }
-
-        .card-desc {
-            font-size: 0.92rem;
-            color: #ccc;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
+        .card-header { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold-light); margin-bottom: 12px; }
+        .card-desc { font-size: 0.92rem; color: #ccc; line-height: 1.6; margin-bottom: 20px; }
 
         .card-btn {
             background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
@@ -248,17 +219,11 @@
             display: inline-block;
         }
 
-        .card-btn:hover {
-            filter: brightness(1.2);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-        }
+        .card-btn:hover { filter: brightness(1.2); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
 
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(0,0,0,0.85);
             backdrop-filter: blur(8px);
             display: none;
@@ -283,26 +248,9 @@
             text-align: center;
         }
 
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            color: var(--gold-primary);
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            color: var(--gold-light);
-            font-family: 'Cinzel', serif;
-            margin-bottom: 8px;
-        }
+        .modal-close { position: absolute; top: 15px; right: 20px; color: var(--gold-primary); font-size: 1.8rem; cursor: pointer; }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; color: var(--gold-light); font-family: 'Cinzel', serif; margin-bottom: 8px; }
 
         .form-control {
             width: 100%;
@@ -314,12 +262,7 @@
             font-size: 1rem;
         }
 
-        .pad-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
+        .pad-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; }
 
         .beat-pad {
             background: var(--glass-bg);
@@ -478,9 +421,7 @@
             { name: "Rishi Warriors", score: 0 }
         ];
 
-        window.onload = function() {
-            renderScoreboard();
-        };
+        window.onload = function() { renderScoreboard(); };
 
         function renderScoreboard() {
             const bar = document.getElementById('scoreboardBar');
@@ -511,14 +452,9 @@
             event.target.classList.add('active');
         }
 
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
-        }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-        function openSetupModal() {
-            updateSetupForm();
-            document.getElementById('setupModal').classList.add('active');
-        }
+        function openSetupModal() { updateSetupForm(); document.getElementById('setupModal').classList.add('active'); }
 
         function updateSetupForm() {
             const count = parseInt(document.getElementById('setupCount').value) || 2;
@@ -606,6 +542,59 @@
         });
 
         function launchJeopardyInNewTab() {
+            const jeopardyDataJSON = JSON.stringify([
+                {
+                    theme: "Gods of Cinema",
+                    questions: [
+                        { points: 100, prompt: "In this 2008 blockbuster, Kamal Haasan plays 10 distinct roles, including a scientist, a priest, and a CIA officer.", answer: "Dasavathaaram" },
+                        { points: 200, prompt: "Mani Ratnam's iconic film starring Rajinikanth and Mammootty is based on the friendship between Karna and Duryodhana.", answer: "Thalapathy" },
+                        { points: 300, prompt: "Sivaji Ganesan played 9 different roles in this classic 1964 Tamil movie depicting various emotions (Rasas).", answer: "Navaratri" },
+                        { points: 400, prompt: "This veteran actress delivered an unforgettable performance as the fierce Queen Mother Sivagami in Baahubali.", answer: "Ramya Krishnan" },
+                        { points: 500, prompt: "Sivaji Ganesan played Narada in this 1965 mythological film that dramatizes a debate on who is superior: Knowledge, Wealth, or Power.", answer: "Saraswathi Sabatham" }
+                    ]
+                },
+                {
+                    theme: "Epic Bonds",
+                    questions: [
+                        { points: 100, prompt: "Lord Rama and King Sugriva cemented their sacred alliance after meeting through this loyal monkey deity.", answer: "Brothers-in-law (Allies / Sugriva)" },
+                        { points: 200, prompt: "These twin sons of Lord Rama and Sita grew up in Sage Valmiki's ashram and captured the Ashwamedha horse.", answer: "Luv and Kush" },
+                        { points: 300, prompt: "Lord Ayyappa (Hariharaputra) was born from the sacred divine union of Lord Shiva and Lord Vishnu in this form.", answer: "Mohini" },
+                        { points: 400, prompt: "These two divine eagle brothers raced toward the sun in their youth; the elder sacrificed his wings to protect the younger.", answer: "Garuda & Jatayu (or Sampati & Jatayu)" },
+                        { points: 500, prompt: "This deity of death and his divine river goddess sister celebrate their brother-sister bond during Yama Dwitiya.", answer: "Yamaraj & Yamuna (Jamuna)" }
+                    ]
+                },
+                {
+                    theme: "One Letter Away",
+                    questions: [
+                        { points: 100, prompt: "Change one letter in Lord Shiva's name to get the name of Lord Rama's divine consort.", answer: "Siva -> Sita" },
+                        { points: 200, prompt: "Change one letter in the hero of the Ramayana to name the ten-headed King of Lanka.", answer: "Raman -> Ravan" },
+                        { points: 300, prompt: "Change one letter in the name of the tragic hero of Mahabharata to get an affectionate Tamil name for Krishna.", answer: "Karna -> Kanna" },
+                        { points: 400, prompt: "Change one letter in a name for Shiva to get a name for Vishnu.", answer: "Hara -> Hari" },
+                        { points: 500, prompt: "Change one letter in the name of Sugriva's powerful elder brother to get the Goddess of Knowledge.", answer: "Vali -> Vani" }
+                    ]
+                },
+                {
+                    theme: "This is how we Navratri",
+                    questions: [
+                        { points: 100, prompt: "The traditional practice of setting up stepped wooden platforms to display clay dolls in Tamil Nadu & South India.", answer: "Golu" },
+                        { points: 200, prompt: "UNESCO-recognized grand festival in West Bengal featuring themed temporary shrines (pandals) and Dhunuchi Naach.", answer: "Durga Puja" },
+                        { points: 300, prompt: "Native to Gujarat, this high-energy folk dance performed in concentric circles around a lit lamp involves rhythmic clapping.", answer: "Garba" },
+                        { points: 400, prompt: "Karnataka's 10-day state festival celebrating Goddess Chamundeshwari, featuring a parade with an elephant carrying a 750-kg throne.", answer: "Mysuru Dasara" },
+                        { points: 500, prompt: "Dramatic open-air performance across Northern India depicting the life of Lord Rama, ending on Dussehra with effigy burning.", answer: "Ramlila" }
+                    ]
+                },
+                {
+                    theme: "Gopuram GeoGuesser",
+                    questions: [
+                        { points: 100, prompt: "", image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTERUTExIWFhUXGB0bGBcYGBgbGxofGBoYGh8ZGxsYHSohGholHRsdITEiJSkrLi4uGyAzODMtNygtLisBCgoKDg0OGxAQGy0lICUtLy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLi0tLS0tLf/AABEIALcBEwMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAADAAIEBQYBB//EAEoQAAECBAMEBgcDCgQFBQEAAAECEQADITEEEkEFIlFhBhNxgZGhMkKxwdHh8BWpvq/9oADAMBAWar/zS2a33jP3f/Ovd4/Y/2f43s3AAMv1q/O13/44S9m/e5f+mZ3j9j/Z/jewEAt5S/l29v+qBvP/e/f8s5q5s7/AG3fP/C4A2H3p/831kZz/3/AH8s3M7/AGffp84L2b/s/Ab2LgBl/P9a3X/AGL6yJ0mY4e8L1P0g+f4Q7s32mRnH/f0/aIUn3l/K41P1i2w851t2D4xS9m/0u4eXN6b3iL/6aX8v3+5/s/x3YuADv8AWs/O59sKdn3nS1648NfPq/x+0082f/f5o0M/D1y/H/u/A3mPne/7mB/Z10p9f/vSgU/0038L2RnH2H3a+3p1Uufi92/OAnE1qPevL1a7yvj85s1f6Yfxf47svAC30/vTjE+V3fL4w/s0mff/Lq/GInF1Y08fXm54/t9x3Z35v9kSZT5n/v15aebS3O/Iwns7f4a/s3M4O//pAn+I/e5xZz84T2bf/Ofz1XfO4S3n505N/A4e0p/x/s3snAFfP615QGbiqv4Xvfx+S+6Nf0I3sH3/AH3xPZz/AN/p362O3/M7fIn5cO7f2E05yffv09+H/O/fXv3f/O49m/7P8b2DgAMfn54TIn/s66fve+L1p0w8Lz9sS/A3v/AL6eL3+p7Of8P/M6fO59X/fE32b21/x3Y2AJmE/aPfv82G6I51h1Plx5V5a399ZOf893/e/k4A7L6Nf2fLw1kZ0134Xv3M/mX6G8N7P/d633219f8Ad2XgAnfQd/L45wSVP3h8/s/P3j2b+91P53Xv950p41P2Y50iA/d1q452v2fE2I1J3u/Nq9244/U4mBf2e6l7p3s/x3YmAB1+y/x3Y9n45/A8418/A5o8/f8/CeP1fP/O/1f4s+fP3/AL/POfp93f/p2+k9m/vdT/P+9m5E/fG34x1E23f8vnF72bf8bfA9m44T4aZ33/H7p+eMOfI15v5+N8f897yP0N4m38ffy3/f/eL44s23mPq/3rI3m/vS/N7/AL08/v1/2O6P+y/G9iYIeL2/XPhvO404a/m45a8fL357v54u9nH2X52f2X8AAn/UfXl5v8A4/3d16n2ffy3qI/d7/P582/e93f+/W11b2ff6X78/m6/f378/k8A4L/vT6/c8d2345/d1q4m//AE+/c/s83n8934y/33+D/f/f8D2b+91P5/2O6M+2v53v7f54p/0x/3S/f8A+mY+/f8A6ff2X353fzzef325+/e0e3fX/Xv254X4eL3f3s3x4fD42fA4e05/1X7/ALy3/9k=", answer: "Tirupati Venkateswara Temple (Tirumala)" },
+                        { points: 200, prompt: "", image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUSExMVFRUXGBcXGBgYGBcbGhcdGRcYGBcdGiAdHiggGBolGxcXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0lHyYtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tNS0tLS0tLS0tLS0tLS0tLf/AABEIALoBDwMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAADAAIEBQYBB//EAEEMAAIBAgQDBQYDBgQGAgMBAAECEQADMBIhMQVBURMiYXGRBjKBobHwQsHRFCNScuHxJDNighVDU5KishZjg8LiB//EABkBAAMBAQEAAAAAAAAAAAAAAAABAgMEBf/EACoRAAICAgIBAgUEAwAAAAAAAAABAhEDIRIxQSJRBBMUYZEycaHwgdHh/9oADAMBAWar/zS2a33jP3f/Ovd4/Y/2f43s3AAMv1q/O13/44S9m/e5f+mZ3j9j/Z/jewEAt5S/l29v+qBvP/e/f8s5q5s7/AG3fP/C4A2H3p/831kZz/3/AH8s3M7/AGffp84L2b/s/Ab2LgBl/P9a3X/AGL6yJ0mY4e8L1P0g+f4Q7s32mRnH/f0/aIUn3l/K41P1i2w851t2D4xS9m/0u4eXN6b3iL/6aX8v3+5/s/x3YuADv8AWs/O59sKdn3nS1648NfPq/x+0082f/f5o0M/D1y/H/u/A3mPne/7mB/Z10p9f/vSgU/0038L2RnH2H3a+3p1Uufi92/OAnE1qPevL1a7yvj85s1f6Yfxf47svAC30/vTjE+V3fL4w/s0mff/Lq/GInF1Y08fXm54/t9x3Z35v9kSZT5n/v15aebS3O/Iwns7f4a/s3M4O//pAn+I/e5xZz84T2bf/Ofz1XfO4S3n505N/A4e0p/x/s3snAFfP615QGbiqv4Xvfx+S+6Nf0I3sH3/AH3xPZz/AN/p362O3/M7fIn5cO7f2E05yffv09+H/O/fXv3f/O49m/7P8b2DgAMfn54TIn/s66fve+L1p0w8Lz9sS/A3v/AL6eL3+p7Of8P/M6fO59X/fE32b21/x3Y2AJmE/aPfv82G6I51h1Plx5V5a399ZOf893/e/k4A7L6Nf2fLw1kZ0134Xv3M/mX6G8N7P/d633219f8Ad2XgAnfQd/L45wSVP3h8/s/P3j2b+91P53Xv950p41P2Y50iA/d1q452v2fE2I1J3u/Nq9244/U4mBf2e6l7p3s/x3YmAB1+y/x3Y9n45/A8418/A5o8/f8/CeP1fP/O/1f4s+fP3/AL/POfp93f/p2+k9m/vdT/P+9m5E/fG34x1E23f8vnF72bf8bfA9m44T4aZ33/H7p+eMOfI15v5+N8f897yP0N4m38ffy3/f/eL44s23mPq/3rI3m/vS/N7/AL08/v1/2O6P+y/G9iYIeL2/XPhvO404a/m45a8fL357v54u9nH2X52f2X8AAn/UfXl5v8A4/3d16n2ffy3qI/d7/P582/e93f+/W11b2ff6X78/m6/f378/k8A4L/vT6/c8d2345/d1q4m//AE+/c/s83n8934y/33+D/f/f8D2b+91P5/2O6M+2v53v7f54p/0x/3S/f8A+mY+/f8A6ff2X353fzzef325+/e0e3fX/Xv254X4eL3f3s3x4fD42fA4e05/1X7/ALy3/9k=", answer: "Trichy Ucchi Pillayar Temple (Rockfort)" },
+                        { points: 300, prompt: "", image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Brihadisvara_Temple%2C_Thanjavur.jpg", answer: "Thanjavur Brihadeeswarar Temple (Big Temple)" },
+                        { points: 400, prompt: "", image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIQEhUTExIVFhUXFhUYFxgYFxcXFhYYFRYXGBcYGBgZHSggGB0lGxUXITEhJSorMC4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0lICUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAMABBgMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAABAgMEBf/EAEEQAAIBAgQDBQYDBgQGAgMBAAECEQADITEEEkEFIlFhBhNxgZGhMkKxwdHh8BWpvq/9oADAMBAWar/zS2a33jP3f/Ovd4/Y/2f43s3AAMv1q/O13/44S9m/e5f+mZ3j9j/Z/jewEAt5S/l29v+qBvP/e/f8s5q5s7/AG3fP/C4A2H3p/831kZz/3/AH8s3M7/AGffp84L2b/s/Ab2LgBl/P9a3X/AGL6yJ0mY4e8L1P0g+f4Q7s32mRnH/f0/aIUn3l/K41P1i2w851t2D4xS9m/0u4eXN6b3iL/6aX8v3+5/s/x3YuADv8AWs/O59sKdn3nS1648NfPq/x+0082f/f5o0M/D1y/H/u/A3mPne/7mB/Z10p9f/vSgU/0038L2RnH2H3a+3p1Uufi92/OAnE1qPevL1a7yvj85s1f6Yfxf47svAC30/vTjE+V3fL4w/s0mff/Lq/GInF1Y08fXm54/t9x3Z35v9kSZT5n/v15aebS3O/Iwns7f4a/s3M4O//pAn+I/e5xZz84T2bf/Ofz1XfO4S3n505N/A4e0p/x/s3snAFfP615QGbiqv4Xvfx+S+6Nf0I3sH3/AH3xPZz/AN/p362O3/M7fIn5cO7f2E05yffv09+H/O/fXv3f/O49m/7P8b2DgAMfn54TIn/s66fve+L1p0w8Lz9sS/A3v/AL6eL3+p7Of8P/M6fO59X/fE32b21/x3Y2AJmE/aPfv82G6I51h1Plx5V5a399ZOf893/e/k4A7L6Nf2fLw1kZ0134Xv3M/mX6G8N7P/d633219f8Ad2XgAnfQd/L45wSVP3h8/s/P3j2b+91P53Xv950p41P2Y50iA/d1q452v2fE2I1J3u/Nq9244/U4mBf2e6l7p3s/x3YmAB1+y/x3Y9n45/A8418/A5o8/f8/CeP1fP/O/1f4s+fP3/AL/POfp93f/p2+k9m/vdT/P+9m5E/fG34x1E23f8vnF72bf8bfA9m44T4aZ33/H7p+eMOfI15v5+N8f897yP0N4m38ffy3/f/eL44s23mPq/3rI3m/vS/N7/AL08/v1/2O6P+y/G9iYIeL2/XPhvO404a/m45a8fL357v54u9nH2X52f2X8AAn/UfXl5v8A4/3d16n2ffy3qI/d7/P582/e93f+/W11b2ff6X78/m6/f378/k8A4L/vT6/c8d2345/d1q4m//AE+/c/s83n8934y/33+D/f/f8D2b+91P5/2O6M+2v53v7f54p/0x/3S/f8A+mY+/f8A6ff2X353fzzef325+/e0e3fX/Xv254X4eL3f3s3x4fD42fA4e05/1X7/ALy3/9k=", answer: "Shravanabelagola (Gommateshwara Temple)" },
+                        { points: 500, prompt: "", image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSEBIWFRUVGRsZFhUVFhUaFhcXGBgaGBcaGBcaHiggGBolGxbXITEhJSkrLi4uGh8zODMtNygtLysBCgoKDg0OGxAQGy0lICUvLS0vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAMIBAwMBEQACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAADAAIEBQYBB//EAEEQAAIBAgQDBQYDBgQGAgMBAAECEQADITEEEkEFIlFhBhNxgZGhMkKxwdHh8BWpvq/9oADAMBAWar/zS2a33jP3f/Ovd4/Y/2f43s3AAMv1q/O13/44S9m/e5f+mZ3j9j/Z/jewEAt5S/l29v+qBvP/e/f8s5q5s7/AG3fP/C4A2H3p/831kZz/3/AH8s3M7/AGffp84L2b/s/Ab2LgBl/P9a3X/AGL6yJ0mY4e8L1P0g+f4Q7s32mRnH/f0/aIUn3l/K41P1i2w851t2D4xS9m/0u4eXN6b3iL/6aX8v3+5/s/x3YuADv8AWs/O59sKdn3nS1648NfPq/x+0082f/f5o0M/D1y/H/u/A3mPne/7mB/Z10p9f/vSgU/0038L2RnH2H3a+3p1Uufi92/OAnE1qPevL1a7yvj85s1f6Yfxf47svAC30/vTjE+V3fL4w/s0mff/Lq/GInF1Y08fXm5", answer: "Murudeshwar Temple (Karnataka)" }
+                    ]
+                }
+            ]);
+
             const jeopardyHTML = `
 <!DOCTYPE html>
 <html lang="en">
@@ -678,58 +667,7 @@
             if (delta > 0) confetti({ particleCount: 35, spread: 50, origin: { y: 0.2 } });
         }
 
-        const jeopardyData = [
-            {
-                theme: "Gods of Cinema",
-                questions: [
-                    { points: 100, prompt: "In this 2008 blockbuster, Kamal Haasan plays 10 distinct roles, including a scientist, a priest, and a CIA officer.", answer: "Dasavathaaram" },
-                    { points: 200, prompt: "Mani Ratnam's iconic film starring Rajinikanth and Mammootty is based on the friendship between Karna and Duryodhana.", answer: "Thalapathy" },
-                    { points: 300, prompt: "Sivaji Ganesan played 9 different roles in this classic 1964 Tamil movie depicting various emotions (Rasas).", answer: "Navaratri" },
-                    { points: 400, prompt: "This veteran actress delivered an unforgettable performance as the fierce Queen Mother Sivagami in Baahubali.", answer: "Ramya Krishnan" },
-                    { points: 500, prompt: "Sivaji Ganesan played Narada in this 1965 mythological film that dramatizes a debate on who is superior: Knowledge, Wealth, or Power.", answer: "Saraswathi Sabatham" }
-                ]
-            },
-            {
-                theme: "Epic Bonds",
-                questions: [
-                    { points: 100, prompt: "Lord Rama and King Sugriva cemented their sacred alliance after meeting through this loyal monkey deity.", answer: "Brothers-in-law (Allies / Sugriva)" },
-                    { points: 200, prompt: "These twin sons of Lord Rama and Sita grew up in Sage Valmiki's ashram and captured the Ashwamedha horse.", answer: "Luv and Kush" },
-                    { points: 300, prompt: "Lord Ayyappa (Hariharaputra) was born from the sacred divine union of Lord Shiva and Lord Vishnu in this form.", answer: "Mohini" },
-                    { points: 400, prompt: "These two divine eagle brothers raced toward the sun in their youth; the elder sacrificed his wings to protect the younger.", answer: "Garuda & Jatayu (or Sampati & Jatayu)" },
-                    { points: 500, prompt: "This deity of death and his divine river goddess sister celebrate their brother-sister bond during Yama Dwitiya.", answer: "Yamaraj & Yamuna (Jamuna)" }
-                ]
-            },
-            {
-                theme: "One Letter Away",
-                questions: [
-                    { points: 100, prompt: "Change one letter in Lord Shiva's name to get the name of Lord Rama's divine consort.", answer: "Siva -> Sita" },
-                    { points: 200, prompt: "Change one letter in the hero of the Ramayana to name the ten-headed King of Lanka.", answer: "Raman -> Ravan" },
-                    { points: 300, prompt: "Change one letter in the name of the tragic hero of Mahabharata to get an affectionate Tamil name for Krishna.", answer: "Karna -> Kanna" },
-                    { points: 400, prompt: "Change one letter in a name for Shiva to get a name for Vishnu.", answer: "Hara -> Hari" },
-                    { points: 500, prompt: "Change one letter in the name of Sugriva's powerful elder brother to get the Goddess of Knowledge.", answer: "Vali -> Vani" }
-                ]
-            },
-            {
-                theme: "This is how we Navratri",
-                questions: [
-                    { points: 100, prompt: "The traditional practice of setting up stepped wooden platforms to display clay dolls in Tamil Nadu & South India.", answer: "Golu" },
-                    { points: 200, prompt: "UNESCO-recognized grand festival in West Bengal featuring themed temporary shrines (pandals) and Dhunuchi Naach.", answer: "Durga Puja" },
-                    { points: 300, prompt: "Native to Gujarat, this high-energy folk dance performed in concentric circles around a lit lamp involves rhythmic clapping.", answer: "Garba" },
-                    { points: 400, prompt: "Karnataka's 10-day state festival celebrating Goddess Chamundeshwari, featuring a parade with an elephant carrying a 750-kg throne.", answer: "Mysuru Dasara" },
-                    { points: 500, prompt: "Dramatic open-air performance across Northern India depicting the life of Lord Rama, ending on Dussehra with effigy burning.", answer: "Ramlila" }
-                ]
-            },
-            {
-                theme: "Gopuram GeoGuesser",
-                questions: [
-                    { points: 100, prompt: "", image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTERUTExIWFhUXGB0bGBcYGBgbGxofGBoYGh8ZGxsYHSohGholHRsdITEiJSkrLi4uGyAzODMtNygtLisBCgoKDg0OGxAQGy0lICUtLy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLi0tLS0tLf/AABEIALcBEwMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAADAAIEBQYBB//EAEoQAAECBAMEBgcDCgQFBQEAAAECEQADITEEEkEFIlFhBhNxgZGhMkKxwdHh8BWpvq/9oADAMBAWar/zS2a33jP3f/Ovd4/Y/2f43s3AAMv1q/O13/44S9m/e5f+mZ3j9j/Z/jewEAt5S/l29v+qBvP/e/f8s5q5s7/AG3fP/C4A2H3p/831kZz/3/AH8s3M7/AGffp84L2b/s/Ab2LgBl/P9a3X/AGL6yJ0mY4e8L1P0g+f4Q7s32mRnH/f0/aIUn3l/K41P1i2w851t2D4xS9m/0u4eXN6b3iL/6aX8v3+5/s/x3YuADv8AWs/O59sKdn3nS1648NfPq/x+0082f/f5o0M/D1y/H/u/A3mPne/7mB/Z10p9f/vSgU/0038L2RnH2H3a+3p1Uufi92/OAnE1qPevL1a7yvj85s1f6Yfxf47svAC30/vTjE+V3fL4w/s0mff/Lq/GInF1Y08fXm54/t9x3Z35v9kSZT5n/v15aebS3O/Iwns7f4a/s3M4O//pAn+I/e5xZz84T2bf/Ofz1XfO4S3n505N/A4e0p/x/s3snAFfP615QGbiqv4Xvfx+S+6Nf0I3sH3/AH3xPZz/AN/p362O3/M7fIn5cO7f2E05yffv09+H/O/fXv3f/O49m/7P8b2DgAMfn54TIn/s66fve+L1p0w8Lz9sS/A3v/AL6eL3+p7Of8P/M6fO59X/fE32b21/x3Y2AJmE/aPfv82G6I51h1Plx5V5a399ZOf893/e/k4A7L6Nf2fLw1kZ0134Xv3M/mX6G8N7P/d633219f8Ad2XgAnfQd/L45wSVP3h8/s/P3j2b+91P53Xv950p41P2Y50iA/d1q452v2fE2I1J3u/Nq9244/U4mBf2e6l7p3s/x3YmAB purchases: "Tirupati Venkateswara Temple (Tirumala)" },
-                    { points: 200, prompt: "", image: "data:image/jpeg;base64,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", answer: "Trichy Ucchi Pillayar Temple (Rockfort)" },
-                    { points: 300, prompt: "", image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Brihadisvara_Temple%2C_Thanjavur.jpg", answer: "Thanjavur Brihadeeswarar Temple (Big Temple)" },
-                    { points: 400, prompt: "", image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIQEhUTExIVFhUXFhUYFxgYFxcXFhYYFRYXGBcYGBgZHSggGB0lGxUXITEhJSorMC4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0lICUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAMABBgMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAABAgMEBf/EAEEQAAIBAgQDBQYDBgQGAgMBAAECEQADITEEEkEFIlFhBhNxgZGhMkKxwdHh8BWpvq/9oADAMBAWar/zS2a33jP3f/Ovd4/Y/2f43s3AAMv1q/O13/44S9m/e5f+mZ3j9j/Z/jewEAt5S/l29v+qBvP/e/f8s5q5s7/AG3fP/C4A2H3p/831kZz/3/AH8s3M7/AGffp84L2b/s/Ab2LgBl/P9a3X/AGL6yJ0mY4e8L1P0g+f4Q7s32mRnH/f0/aIUn3l/K41P1i2w851t2D4xS9m/0u4eXN6b3iL/6aX8v3+5/s/x3YuADv8AWs/O59sKdn3nS1648NfPq/x+0082f/f5o0M/D1y/H/u/A3mPne/7mB/Z10p9f/vSgU/0038L2RnH2H3a+3p1Uufi92/OAnE1qPevL1a7yvj85s1f6Yfxf47svAC30/vTjE+V3fL4w/s0mff/Lq/GInF1Y08fXm54/t9x3Z35v9kSZT5n/v15aebS3O/Iwns7f4a/s3M4O//pAn+I/e5xZz84T2bf/Ofz1XfO4S3n505N/A4e0p/x/s3snAFfP615QGbiqv4Xvfx+S+6Nf0I3sH3/AH3xPZz/AN/p362O3/M7fIn5cO7f2E05yffv09+H/O/fXv3f/O49m/7P8b2DgAMfn54TIn/s66fve+L1p0w8Lz9sS/A3v/AL6eL3+p7Of8P/M6fO59X/fE32b21/x3Y2AJmE/aPfv82G6I51h1Plx5V5a399ZOf893/e/k4A7L6Nf2fLw1kZ0134Xv3M/mX6G8N7P/d633219f8Ad2XgAnfQd/L45wSVP3h8/s/P3j2b+91P53Xv950p41P2Y50iA/d1q452v2fE2I1J3u/Nq9244/U4mBf2e6l7p3s/x3YmAB1+y/x3Y9n45/A8418/A5o8/f8/CeP1fP/O/1f4s+fP3/AL/POfp93f/p2+k9m/vdT/P+9m5E/fG34x1E23f8vnF72bf8bfA9m44T4aZ33/H7p+eMOfI15v5+N8f897yP0N4m38ffy3/f/eL44s23mPq/3rI3m/vS/N7/AL08/v1/2O6P+y/G9iYIeL2/XPhvO404a/m45a8fL357v54u9nH2X52f2X8AAn/UfXl5v8A4/3d16n2ffy3qI/d7/P582/e93f+/W11b2ff6X78/m6/f378/k8A4L/vT6/c8d2345/d1q4m//AE+/c/s83n8934y/33+D/f/f8D2b+91P5/2O6M+2v53v7f54p/0x/3S/f8A+mY+/f8A6ff2X353fzzef325+/e0e3fX/Xv254X4eL3f3s3x4fD42fA4e05/1X7/ALy3/9k=", answer: "Shravanabelagola (Gommateshwara Temple)" },
-                    { points: 500, prompt: "", image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSEBIWFRUVGRsZFhUVFhUaFhcXGBgaGBcaGBcaHiggGBolGxbXITEhJSkrLi4uGh8zODMtNygtLysBCgoKDg0OGxAQGy0lICUvLS0vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAMIBAwMBEQACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAADAAIEBQYBB//EAEEQAAIBAgQDBQYDBgQGAgMBAAECEQADITEEEkEFIlFhBhNxgZGhMkKxwdHh8BWpvq/9oADAMBAWar/zS2a33jP3f/Ovd4/Y/2f43s3AAMv1q/O13/44S9m/e5f+mZ3j9j/Z/jewEAt5S/l29v+qBvP/e/f8s5q5s7/AG3fP/C4A2H3p/831kZz/3/AH8s3M7/AGffp84L2b/s/Ab2LgBl/P9a3X/AGL6yJ0mY4e8L1P0g+f4Q7s32mRnH/f0/aIUn3l/K41P1i2w851t2D4xS9m/0u4eXN6b3iL/6aX8v3+5/s/x3YuADv8AWs/O59sKdn3nS1648NfPq/x+0082f/f5o0M/D1y/H/u/A3mPne/7mB/Z10p9f/vSgU/0038L2RnH2H3a+3p1Uufi92/OAnE1qPevL1a7yvj85s1f6Yfxf47svAC30/vTjE+V3fL4w/s0mff/Lq/GInF1Y08fXm5", answer: "Murudeshwar Temple (Karnataka)" }
-                ]
-            }
-        ];
+        const jeopardyData = \${jeopardyDataJSON};
 
         function renderJBoard() {
             const board = document.getElementById('jBoard');
